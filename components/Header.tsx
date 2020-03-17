@@ -3,7 +3,7 @@ import Link from "next/link";
 export default () => {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-indigo-900 p-2">
-      <span className="font-semibold text-4xl text-white mx-4">
+      <span className="font-semibold text-4xl text-white ml-2 mr-8">
         Cutting Boards
       </span>
       <div className="block lg:hidden">
@@ -21,22 +21,22 @@ export default () => {
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-xl lg:flex-grow text-white">
           <Link href="/">
-            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-4">
+            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-8">
               Home
             </a>
           </Link>
           <Link href="/">
-            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-4">
+            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-8">
               Custom Orders
             </a>
           </Link>
           <Link href="/">
-            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-4">
+            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-8">
               In Stock
             </a>
           </Link>
           <Link href="/">
-            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-4">
+            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200">
               Contact Us
             </a>
           </Link>

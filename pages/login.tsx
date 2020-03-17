@@ -5,9 +5,7 @@ export default ({ children }) => {
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="w-full max-w-xs">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <h1 className="font-semibold text-xl text-gray-700">
-            Fightback Treasurer
-          </h1>
+          <h1 className="font-semibold text-xl text-gray-700">Customer</h1>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -53,9 +51,6 @@ export default ({ children }) => {
             </Link>
           </div>
         </form>
-        <p className="text-center text-gray-500 text-xs">
-          Official Fightback Treasurers Only
-        </p>
       </div>
     </div>
   );

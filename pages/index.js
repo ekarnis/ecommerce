@@ -5,6 +5,8 @@ const products = [
   {
     id: 0,
     wood: "Oak",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,
@@ -14,6 +16,8 @@ const products = [
   {
     id: 1,
     wood: "Willow",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,
@@ -23,6 +27,8 @@ const products = [
   {
     id: 2,
     wood: "Willow",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,
@@ -32,6 +38,8 @@ const products = [
   {
     id: 3,
     wood: "Willow",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,
@@ -41,6 +49,8 @@ const products = [
   {
     id: 4,
     wood: "Willow",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,
@@ -50,6 +60,8 @@ const products = [
   {
     id: 5,
     wood: "Willow",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,
@@ -59,6 +71,8 @@ const products = [
   {
     id: 6,
     wood: "Willow",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,
@@ -68,6 +82,8 @@ const products = [
   {
     id: 7,
     wood: "Willow",
+    price: 50,
+    stock: 7,
     length: 50,
     width: 50,
     thickness: 5,

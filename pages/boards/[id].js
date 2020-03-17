@@ -66,11 +66,18 @@ export default function Board() {
         </div>
         <div className="w-1/3 flex flex-col items-center">
           <div className="flex flex-col items-center p-4 m-4 border border-gray-200 bg-white rounded-lg shadow-lg">
-            <h3 className="text-5xl font-bold text-indigo-500">{wood}</h3>
-            <span>
-              {width}cm x {length}cm x {thickness}cm
-            </span>
-            <span className="mb-4"> {stain}</span>
+            <div className="w-full flex justify-between">
+              <h3 className="text-4xl font-bold text-indigo-500">$50 CAD</h3>
+              <h3 className="text-4xl font-bold text-indigo-500">{wood}</h3>
+            </div>
+            <div className="w-full">
+              <span className="float-right">
+                {width}cm x {length}cm x {thickness}cm
+              </span>
+            </div>
+            <div className="w-full mb-4">
+              <span className="float-right">{stain}</span>
+            </div>
             <span>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -79,6 +86,9 @@ export default function Board() {
               reprehenderit in voluptate velit esse cillum dolore eu fugiat
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </span>
+            <span className="mt-4">
+              We have <span className="text-indigo-500">7</span> in stock
             </span>
             <div>
               <button className="inline-block text-md px-4 py-2 leading-none border rounded text-indigo-500 border-indigo-500 hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4 mr-2">
@@ -95,7 +105,7 @@ export default function Board() {
           </div>
         </div>
       </div>
-      <h3 className="text-3xl font-bold text-indigo-500">Reviews</h3>
+      <h3 className="text-4xl font-bold text-indigo-500">Reviews</h3>
       <div className="flex flex-wrap">{reviewBoxes}</div>
     </Layout>
   );
