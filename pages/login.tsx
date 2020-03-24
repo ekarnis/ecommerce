@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default ({ children }) => {
   return (
@@ -53,5 +53,5 @@ export default ({ children }) => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
