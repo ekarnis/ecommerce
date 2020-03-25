@@ -7,20 +7,16 @@ import fetch from 'isomorphic-unfetch'
 const GRAPHQL_URL = 'http://localhost:3000/api'
 
 const link = createHttpLink({
-  fetch, // Switches between unfetch & node-fetch for client & server.
+  fetch,
   uri: GRAPHQL_URL
 })
 
-// Export a HOC from next-with-apollo
 // Docs: https://www.npmjs.com/package/next-with-apollo
 export default withApollo(
-  // You can get headers and ctx (context) from the callback params
-  // e.g. ({ headers, ctx, initialState })
   ({ initialState }) =>
     new ApolloClient({
       link: link,
       cache: new InMemoryCache()
-        //  rehydrate the cache using the initial data passed from the server:
         .restore(initialState || {})
     })
 )
