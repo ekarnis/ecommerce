@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
-import fetch from 'isomorphic-unfetch'
+import { useQuery } from '@apollo/react-hooks'
+import ALBUMS_QUERY from '../constants/graphql/albums.query'
 
 import Layout from '../components/Layout'
 import ProductBox from '../components/ProductBox'
@@ -100,31 +101,31 @@ const productBoxes = products.map(product => (
   <ProductBox key={product.id} {...product}></ProductBox>
 ))
 
-const Index = props => (
-  <Layout>
-    <div className="flex items-center justify-start flex-wrap">
-      {productBoxes}
-      <h1>Batman TV Shows</h1>
-      {props.shows.map(show => (
-        <div key={show.id}>
-          <Link href="/p/[id]" as={`/p/${show.id}`}>
-            <a>{show.name}</a>
-          </Link>
-        </div>
-      ))}
-    </div>
-  </Layout>
-)
-
-Index.getInitialProps = async function () {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-  const data = await res.json()
-
-  console.log(`Show data fetched. Count: ${data.length}`)
-
-  return {
-    shows: data.map(entry => entry.show)
+const Index = () => {
+  const { data, loading, error } = useQuery(ALBUMS_QUERY)
+  if (loading) {
+    return <p>Loading...</p>
   }
+
+  if (error) {
+    return <p>Error: {JSON.stringify(error)}</p>
+  }
+
+  return (
+    <Layout>
+      <div className="flex items-center justify-start flex-wrap">
+        {productBoxes}
+        <h1>Test: &nbsp;</h1>
+        {data.albums.map(album => (
+          <div key={album.id}>
+            <Link href="/p/[id]" as={`/p/${album.artist.id}`}>
+              <a>{album.artist.id}&nbsp;</a>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </Layout>
+  )
 }
 
 export default Index
