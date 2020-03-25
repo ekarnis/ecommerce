@@ -1,17 +1,30 @@
 {
+  "name": "ecommerce",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Eric Karnis",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ekarnis/ecommerce/issues"
+  },
+  "homepage": "https://github.com/ekarnis/ecommerce",
+  "repository": "https://github.com/ekarnis/ecommerce",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
-    "start": "next start"
+    "start": "next start",
+    "generate": "gqless generate"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^1.2.0",
+    "@gqless/react": "0.0.1-alpha.28",
     "apollo-server-micro": "^2.11.0",
     "autoprefixer": "^9.7.4",
     "dataloader": "^2.0.0",
     "dotenv": "^8.2.0",
     "futil": "^1.67.0",
+    "gqless": "0.0.1-alpha.28",
     "isomorphic-unfetch": "^3.0.0",
     "knex": "^0.20.11",
     "lodash": "^4.17.15",
@@ -25,17 +38,18 @@
     "tailwindcss": "^1.1.4"
   },
   "devDependencies": {
+    "@gqless/cli": "0.0.1-alpha.30",
     "@types/node": "^13.9.1",
     "@types/react": "^16.9.23",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
-    "eslint": "^6.8.0",
     "typescript": "^3.8.3"
   }
 }
