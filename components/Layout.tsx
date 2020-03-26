@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from '../components/Header'
 
 export default ({ children }) => {
   return (
@@ -8,5 +8,5 @@ export default ({ children }) => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}

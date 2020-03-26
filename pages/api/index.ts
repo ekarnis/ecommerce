@@ -1,59 +1,102 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
 import Cors from 'micro-cors'
 import knex from 'knex'
-import DataLoader from 'dataloader'
 
 const typeDefs = gql`
   type Query {
-    albums(first: Int = 25, skip: Int = 0): [Album!]!
+    woods(first: Int = 25, skip: Int = 0): [Wood!]!
+    stains(first: Int = 25, skip: Int = 0): [Stain!]!
+    boards(first: Int = 25, skip: Int = 0): [Board!]!
+    reviews(first: Int = 25, skip: Int = 0): [Review!]!
   }
 
-  type Artist {
+  type Wood {
     id: ID!
     name: String!
-    url: String!
-    albums(first: Int = 25, skip: Int = 0): [Album!]!
   }
 
-  type Album {
+  type Stain {
     id: ID!
     name: String!
-    year: String!
-    artist: Artist!
+  }
+
+  type Board {
+    id: ID!
+    stain: Stain!
+    wood: Wood!
+    reviews(first: Int = 25, skip: Int = 0): [Review!]!
+    stock: Int!
+    width_in_cm: Int!
+    length_in_cm: Int!
+    thickness_in_cm: Int!
+    price_in_usd: Int!
+    picture_url: String!
+    description: String!
+  }
+
+  type Review {
+    id: ID!
+    user_id: Int!
+    board: Board!
+    stars: Int!
+    helpful_votes: Int!
+    not_helpful_votes: Int!
+    content: String!
   }
 `
 
 const resolvers = {
   Query: {
-    albums: (_parent, args, _context) => {
+    woods: (_parent, args, _context) => {
       return db
         .select('*')
-        .from('albums')
-        .orderBy('year', 'asc')
-        .limit(Math.min(args.first, 50))
-        .offset(args.skip)
+        .from('woods')
+        .orderBy('name', 'asc')
+    },
+    stains: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('stains')
+        .orderBy('name', 'asc')
+    },
+    boards: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('boards')
+        .orderBy('price_in_usd', 'asc')
+    },
+    reviews: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('reviews')
+        .orderBy('helpful_votes', 'asc')
     }
   },
 
-  Album: {
-    id: (album, _args, _context) => album.id,
-    artist: (album, _args, { loader }) => {
-      return loader.artist.load(album.artist_id)
-    }
-  },
-
-  Artist: {
-    id: (artist, _args, _context) => artist.id,
-    albums: (artist, args, _context) => {
+  Board: {
+    stain: (board, args, _context) => {
       return db
         .select('*')
-        .from('albums')
-        .where({ artist_id: artist.id })
-        .orderBy('year', 'asc')
-        .limit(Math.min(args.first, 50))
-        .offset(args.skip)
+        .from('stains')
+        .where({ id: board.stain_id })
+        .first()
+    },
+    wood: (board, args, _context) => {
+      return db
+        .select('*')
+        .from('woods')
+        .where({ id: board.wood_id })
+        .first()
+    },
+    reviews: (board, args, _context) => {
+      return db
+        .select('*')
+        .from('reviews')
+        .where({ board_id: board.id })
+        .orderBy('helpful_votes', 'asc')
     }
   }
+
 }
 
 const db = knex({
@@ -61,21 +104,11 @@ const db = knex({
   connection: process.env.PG_CONNECTION_STRING
 })
 
-const loader = {
-  artist: new DataLoader(ids =>
-    db
-      .table('artists')
-      .whereIn('id', ids)
-      .select()
-      .then(rows => ids.map(id => rows.find(row => row.id === id)))
-  )
-}
-
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => {
-    return { loader }
+    return { }
   }
 })
 

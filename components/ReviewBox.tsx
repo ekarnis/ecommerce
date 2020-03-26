@@ -1,7 +1,7 @@
 export default props => {
-  let stars = "";
+  let stars = ''
   for (let i = 0; i < props.stars; i++) {
-    stars += "⭐";
+    stars += '⭐'
   }
 
   return (
@@ -25,5 +25,5 @@ export default props => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}

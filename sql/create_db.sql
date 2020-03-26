@@ -23,7 +23,7 @@ CREATE TABLE boards (
 );
 
 CREATE TABLE reviews (
-    id integer PRIMARY KEY,
+    id smallserial PRIMARY KEY,
     user_id integer,
     board_id integer REFERENCES boards(id),
     stars smallint NOT NULL check (stars > 0),
@@ -31,3 +31,5 @@ CREATE TABLE reviews (
     not_helpful_votes smallint NOT NULL check (not_helpful_votes >= 0),
     content VARCHAR (5000) 
 );
+
+-- TODO: make this a knex migration
