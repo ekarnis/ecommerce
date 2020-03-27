@@ -25,12 +25,12 @@ export default () => {
               Home
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/custom">
             <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-8">
               Custom Orders
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/in-stock">
             <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200 mr-8">
               In Stock
             </a>

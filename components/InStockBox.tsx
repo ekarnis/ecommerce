@@ -6,15 +6,7 @@ export default props => {
       href="/boards/[id]"
       as={
         '/boards/' +
-        props.stain.name +
-        '-' +
-        props.wood.name +
-        '-' +
-        props.width_in_cm +
-        '-' +
-        props.length_in_cm +
-        '-' +
-        props.thickness_in_cm
+        props.id
       }
     >
       <a className="w-64 flex flex-col items-center p-4 m-4 border border-gray-200 hover:border-gray-400 bg-white rounded-lg shadow-lg hover:shadow-xl">

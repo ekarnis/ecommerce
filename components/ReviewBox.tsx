@@ -9,19 +9,19 @@ export default props => {
       <div>
         <div className="w-full flex justify-between mb-4">
           <span className="text-indigo-500 text-lg">
-            {props.name} - {props.country}
+            {props.name ? props.name : 'User'} - {props.country ? props.country : 'Country'}
           </span>
           <span>{stars}</span>
         </div>
 
-        <span>{props.text}</span>
+        <span>{props.content}</span>
       </div>
       <div className="w-full flex justify-between mb-4">
         <button className="inline-block text-sm px-2 py-2 leading-none border rounded text-indigo-500 border-indigo-500 hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4 ">
-          Helpful
+          Not Helpful: {props.not_helpful_votes}
         </button>
         <button className="inline-block text-sm px-2 py-2 leading-none border rounded text-indigo-500 border-indigo-500 hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4 ">
-          Not Helpful
+          Helpful: {props.helpful_votes}
         </button>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-const BOARDS_QUERY = gql`
-  query Boards {
-    boards {
+const BOARD_QUERY = gql`
+  query Board($board_id: ID!) {
+    board(id:$board_id) {
         id
         stain{
             name
@@ -13,6 +13,14 @@ const BOARDS_QUERY = gql`
         length_in_cm
         picture_url
         price_in_usd
+        reviews {
+          id
+          user_id
+          stars
+          helpful_votes
+          not_helpful_votes
+          content
+        }
         stock
         thickness_in_cm
         width_in_cm
@@ -20,4 +28,4 @@ const BOARDS_QUERY = gql`
   }
 `
 
-export default BOARDS_QUERY
+export default BOARD_QUERY

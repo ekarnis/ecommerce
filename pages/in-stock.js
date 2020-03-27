@@ -16,7 +16,11 @@ const Index = () => {
 
   return (
     <Layout>
-      Hey welcome to boards
+      <div className="flex items-center justify-start flex-wrap">
+        {data.boards.map(board =>
+          <InStockBox key={board.id} {...board}></InStockBox>
+        )}
+      </div>
     </Layout>
   )
 }

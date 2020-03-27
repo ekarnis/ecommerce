@@ -7,6 +7,7 @@ const typeDefs = gql`
     woods(first: Int = 25, skip: Int = 0): [Wood!]!
     stains(first: Int = 25, skip: Int = 0): [Stain!]!
     boards(first: Int = 25, skip: Int = 0): [Board!]!
+    board(id: ID!): Board!
     reviews(first: Int = 25, skip: Int = 0): [Review!]!
   }
 
@@ -52,24 +53,39 @@ const resolvers = {
         .select('*')
         .from('woods')
         .orderBy('name', 'asc')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
     },
     stains: (_parent, args, _context) => {
       return db
         .select('*')
         .from('stains')
         .orderBy('name', 'asc')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
     },
     boards: (_parent, args, _context) => {
       return db
         .select('*')
         .from('boards')
         .orderBy('price_in_usd', 'asc')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
+    },
+    board: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('boards')
+        .where({ id: args.id })
+        .first()
     },
     reviews: (_parent, args, _context) => {
       return db
         .select('*')
         .from('reviews')
         .orderBy('helpful_votes', 'asc')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
     }
   },
 
