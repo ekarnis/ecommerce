@@ -1,20 +1,20 @@
 import { useRouter } from 'next/router'
-import { route } from 'next/dist/next-server/server/router'
 
 import { useQuery } from '@apollo/react-hooks'
 import BOARD_QUERY from '../../constants/graphql/board.query'
 
 import Layout from '../../components/Layout'
 import ReviewBox from '../../components/ReviewBox'
+import PrimaryButton from '../../components/PrimaryButton'
 
 export default function Board () {
   const router = useRouter()
 
   const { data, loading, error } = useQuery(
-    BOARD_QUERY, { 
-      variables: { 
+    BOARD_QUERY, {
+      variables: {
         board_id: router.query.id
-      } 
+      }
     }
   )
 
@@ -66,16 +66,11 @@ export default function Board () {
               We have <span className="text-indigo-500">{board.stock}</span> in stock
               </span>
               <div>
-                <button className="inline-block text-md px-4 py-2 leading-none border rounded text-indigo-500 border-indigo-500 hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4 mr-2">
-                -
-                </button>
+                <PrimaryButton buttonText={'-'} />
                 <span>1</span>
-                <button className="inline-block text-md px-4 py-2 leading-none border rounded text-indigo-500 border-indigo-500 hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4 ml-2 mr-2">
-                +
-                </button>
-                <button className="inline-block text-md px-4 py-2 leading-none border rounded text-indigo-500 border-indigo-500 hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4 ">
-                Add to Cart
-                </button>
+                <PrimaryButton buttonText={'+'} />
+
+                <PrimaryButton buttonText={'Add to Cart'} />
               </div>
             </div>
           </div>

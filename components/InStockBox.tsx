@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import PrimaryButton from '../components/PrimaryButton'
+
 export default props => {
   return (
     <Link
@@ -16,9 +18,7 @@ export default props => {
         </span>
         <span className="mb-4">{props.stain.name}</span>
         <img src={props.picture_url}></img>
-        <button className="inline-block text-md px-4 py-2 leading-none border rounded text-indigo-500 border-indigo-500 hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4 ">
-          Add to Cart
-        </button>
+        <PrimaryButton buttonText={'Add to Cart'} />
       </a>
     </Link>
   )
