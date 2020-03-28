@@ -61,7 +61,7 @@ export default () => {
             </a>
           </Link>
           <Link href="/">
-            <a className="inline-block text-md leading-none border rounded border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 px-2 py-4 mr-2 mt-4 lg:mt-0">
+            <a className="inline-block text-md leading-none border rounded border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 p-4 mr-2 mt-4 lg:mt-0">
               Cart
             </a>
           </Link>

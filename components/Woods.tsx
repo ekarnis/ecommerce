@@ -3,7 +3,7 @@ import WOODS_QUERY from '../constants/graphql/woods.query'
 
 import OptionBox from './OptionBox'
 
-const Woods = () => {
+const Woods = props => {
   const { data, loading, error } = useQuery(WOODS_QUERY)
 
   if (loading) {
@@ -17,7 +17,12 @@ const Woods = () => {
   return (
     <div className="flex items-center justify-start flex-wrap">
       {data.woods.map(wood =>
-        <OptionBox key={wood.id} {...wood}></OptionBox>
+        <OptionBox
+          key={wood.id}
+          setHook={props.setWood}
+          {...wood}
+        >
+        </OptionBox>
       )}
     </div>
   )

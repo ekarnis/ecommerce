@@ -3,7 +3,7 @@ import STAINS_QUERY from '../constants/graphql/stains.query'
 
 import OptionBox from './OptionBox'
 
-const Stains = () => {
+const Stains = props => {
   const { data, loading, error } = useQuery(STAINS_QUERY)
 
   if (loading) {
@@ -17,7 +17,12 @@ const Stains = () => {
   return (
     <div className="flex items-center justify-start flex-wrap">
       {data.stains.map(stain =>
-        <OptionBox key={stain.id} {...stain}></OptionBox>
+        <OptionBox
+          key={stain.id}
+          setHook={props.setStain}
+          {...stain}
+        >
+        </OptionBox>
       )}
     </div>
   )
