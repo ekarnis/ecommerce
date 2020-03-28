@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import Woods from '../components/Woods'
 import Stains from '../components/Stains'
 import Sizes from '../components/Sizes'
+
 const Index = () => {
   const [stage, setStage] = useState(0)
   const [wood, setWood] = useState({})
@@ -42,7 +43,7 @@ const Index = () => {
           ? ' x ' + thicknessInCm
           : null}
         {widthInCm !== 0 || lengthInCm !== 0 || thicknessInCm !== 0
-          ? " " + unit
+          ? ' ' + unit
           : null}
       </h3>
 
@@ -86,16 +87,15 @@ const Index = () => {
         </button>
         : null
       }
-      {wood.name !== undefined && stain.name !== undefined && widthInCm !== 0
-          && lengthInCm !== 0 && thicknessInCm !== 0 && stage === 2
-          ? 
-            <button
-              className="fixed right-0 rounded mr-4 flex items-center justify-center inline-block text-md p-4 leading-none border text-indigo-500 border-indigo-500 bg-white hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4"
-              style={{ top: '50%' }}
-            >
-              <span className="text-2xl">Add to Cart</span>
-            </button>
-          : null}
+      {wood.name !== undefined && stain.name !== undefined && widthInCm !== 0 &&
+          lengthInCm !== 0 && thicknessInCm !== 0 && stage === 2
+        ? <button
+          className="fixed right-0 rounded mr-4 flex items-center justify-center inline-block text-md p-4 leading-none border text-indigo-500 border-indigo-500 bg-white hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4"
+          style={{ top: '50%' }}
+        >
+          <span className="text-2xl">Add to Cart</span>
+        </button>
+        : null}
     </Layout>
   )
 }

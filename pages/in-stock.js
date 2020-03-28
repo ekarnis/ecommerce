@@ -16,6 +16,8 @@ const Index = () => {
 
   return (
     <Layout>
+      <h1 className="text-6xl mb-16">Boards in Stock</h1>
+
       <div className="flex items-center justify-start flex-wrap">
         {data.boards.map(board =>
           <InStockBox key={board.id} {...board}></InStockBox>
