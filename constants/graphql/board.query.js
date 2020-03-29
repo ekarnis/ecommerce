@@ -10,6 +10,7 @@ const BOARD_QUERY = gql`
         wood{
             name
         }
+        description
         length_in_cm
         picture_url
         price_in_usd
@@ -24,6 +25,7 @@ const BOARD_QUERY = gql`
         stock
         thickness_in_cm
         width_in_cm
+        
     }
   }
 `
