@@ -12,11 +12,13 @@ const typeDefs = gql`
   type Wood {
     id: ID!
     name: String!
+    picture_url: String!
   }
 
   type Stain {
     id: ID!
     name: String!
+    picture_url: String!
   }
 
   type Board {

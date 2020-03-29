@@ -5,6 +5,7 @@ const WOODS_QUERY = gql`
       woods {
         id
         name
+        picture_url
     }
   }
 `

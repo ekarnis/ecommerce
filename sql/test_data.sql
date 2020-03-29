@@ -1,19 +1,19 @@
-INSERT INTO woods (name) 
+INSERT INTO woods (name, picture_url) 
 VALUES 
-('Oak'),
-('Birch'),
-('Maple'),
-('Mahogany'),
-('Ironwood');
+('Oak', '/board.jpg'),
+('Birch', '/board.jpg'),
+('Maple', '/board.jpg'),
+('Mahogany', '/board.jpg'),
+('Ironwood', '/board.jpg');
 
 
-INSERT INTO stains (name) 
+INSERT INTO stains (name, picture_url) 
 VALUES 
-('Light'),
-('Dark'),
-('Burgundy'),
-('Clear'),
-('Yellow');
+('Light', '/board.jpg'),
+('Dark', '/board.jpg'),
+('Burgundy', '/board.jpg'),
+('Clear', '/board.jpg'),
+('Yellow', '/board.jpg');
 
 
 INSERT INTO boards (
@@ -51,7 +51,7 @@ INSERT INTO reviews (
     stars,
     helpful_votes,
     not_helpful_votes,
-    content,
+    content
 )
 VALUES (
     1,

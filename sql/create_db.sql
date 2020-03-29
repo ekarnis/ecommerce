@@ -1,12 +1,14 @@
 
 CREATE TABLE stains (
     id smallserial PRIMARY KEY,
-    name VARCHAR (500) NOT NULL 
+    name VARCHAR (500) NOT NULL,
+    picture_url VARCHAR (500) NOT NULL
 );
 
 CREATE TABLE woods (
     id smallserial PRIMARY KEY,
-    name VARCHAR (500) NOT NULL 
+    name VARCHAR (500) NOT NULL,
+    picture_url VARCHAR (500) NOT NULL
 );
 
 CREATE TABLE boards (

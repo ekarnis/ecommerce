@@ -5,6 +5,7 @@ const STAINS_QUERY = gql`
       stains {
         id
         name
+        picture_url
     }
   }
 `

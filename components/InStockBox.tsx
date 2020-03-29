@@ -17,7 +17,7 @@ export default props => {
           {props.width_in_cm}cm x {props.length_in_cm}cm x {props.thickness_in_cm}cm
         </span>
         <span className="mb-4">{props.stain.name}</span>
-        <img src={props.picture_url}></img>
+        <img className="my-2" src={props.picture_url}></img>
         <PrimaryButton buttonText={'Add to Cart'} />
       </a>
     </Link>
