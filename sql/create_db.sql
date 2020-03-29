@@ -34,4 +34,17 @@ CREATE TABLE reviews (
     content VARCHAR (5000) 
 );
 
+CREATE TABLE cart (
+    id smallserial PRIMARY KEY, 
+    user_id integer NOT NULL,
+    is_ordered boolean DEFAULT FALSE
+);
+
+CREATE TABLE board_order (
+    id smallserial PRIMARY KEY,
+    cart_id integer REFERENCES cart(id),-- this should be not null
+    board_id integer REFERENCES boards(id),
+    quantity integer
+);
+
 -- TODO: make this a knex migration

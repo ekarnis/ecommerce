@@ -1,8 +1,14 @@
 import Link from 'next/link'
+import { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks'
+import ADD_TO_CART_QUERY from '../constants/graphql/cart.query'
 
 import PrimaryButton from '../components/PrimaryButton'
 
 export default props => {
+  const [addToCart, { data }] = useMutation(ADD_TO_CART_QUERY);
+
+
   return (
     <Link
       href="/boards/[id]"
@@ -18,7 +24,7 @@ export default props => {
         </span>
         <span className="mb-4">{props.stain.name}</span>
         <img className="my-2" src={props.picture_url}></img>
-        <PrimaryButton buttonText={'Add to Cart'} />
+        <PrimaryButton onClick={e => addToCart({ variables: { boardId: props.id } }) } buttonText={'Add to Cart'} />
       </a>
     </Link>
   )

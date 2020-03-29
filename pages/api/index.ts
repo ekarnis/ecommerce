@@ -44,6 +44,13 @@ const resolvers = {
         .orderBy('helpful_votes', 'asc')
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
+    },
+    orders: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('board_order')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
     }
   },
 
@@ -69,6 +76,25 @@ const resolvers = {
         .where({ board_id: board.id })
         .orderBy('helpful_votes', 'asc')
     }
+  },
+
+  Mutation: {
+    addOrderToCart: (_parent, { boardId, quantity }, _context) => {
+      return db('board_order')
+      .insert({board_id: boardId, quantity: quantity})
+      .returning('*')
+      .then(function() {
+        return db
+          .select('*')
+          .from('board_order')
+          .orderBy('id', 'desc')
+          .limit(1)
+          .first()
+      })
+
+
+      // Ideally i would want to use this but it keeps returning null...: .returning('*')
+    },
   }
 }
 

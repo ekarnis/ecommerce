@@ -7,6 +7,18 @@ const typeDefs = gql`
     boards(first: Int = 25, skip: Int = 0): [Board!]!
     board(id: ID!): Board!
     reviews(first: Int = 25, skip: Int = 0): [Review!]!
+    orders(first: Int = 25, skip: Int = 0): [Order!]!
+  }
+
+  type Mutation {
+    addOrderToCart(boardId: ID!, quantity: Int!): Order!
+  }
+
+  type Order {
+    id: ID!
+    cart_id: ID 
+    board_id: Int!
+    quantity: Int!
   }
 
   type Wood {
