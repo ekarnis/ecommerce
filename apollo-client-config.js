@@ -17,6 +17,6 @@ export default withApollo(
     new ApolloClient({
       link: link,
       cache: new InMemoryCache()
-        .restore(initialState || {}),
+        .restore(initialState || {})
     })
 )
