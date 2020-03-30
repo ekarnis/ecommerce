@@ -42,7 +42,7 @@ CREATE TABLE cart (
 
 CREATE TABLE board_order (
     id smallserial PRIMARY KEY,
-    cart_id integer REFERENCES cart(id),-- this should be not null
+    cart_id integer REFERENCES cart(id), -- this should be not null
     board_id integer REFERENCES boards(id),
     quantity integer
 );
