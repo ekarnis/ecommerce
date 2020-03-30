@@ -5,11 +5,11 @@ const Index = () => {
     <Layout>
       <div className="flex w-full">
 
-        <div className="w-1/2 flex flex-col items-center p-4 m-4 border border-gray-200 bg-white rounded-lg shadow-2xl">
+        <div className="w-1/2 flex flex-col items-center p-4 m-4 border border-gray-200 bg-white rounded-lg shadow-xl">
           <img src={'/board.jpg'}></img>
         </div>
 
-        <div className="w-1/2 flex flex-col items-center p-8 m-4 border border-gray-200 bg-white rounded-lg shadow-2xl">
+        <div className="w-1/2 flex flex-col items-center p-8 m-4 border border-gray-200 bg-white rounded-lg shadow-xl">
           <h1 className="text-6xl">Welcome to Board</h1>
           <h2 className="text-3xl mb-8">We make Boards</h2>
           <p>

@@ -26,7 +26,7 @@ const resolvers = {
       return db
         .select('*')
         .from('boards')
-        .orderBy('price_in_usd', 'asc')
+        .orderBy('price_in_cad', 'asc')
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
     },

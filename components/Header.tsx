@@ -1,6 +1,12 @@
+import { useState } from 'react'
+
 import Link from 'next/link'
 
+import SignInModal from './SignInModal'
+
 export default () => {
+  const [showSignInModal, setShowSignInModal] = useState(false)
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-indigo-900 p-2">
       <span className="font-semibold text-4xl text-white ml-2 mr-8">
@@ -55,11 +61,12 @@ export default () => {
             </a>
           </Link>
           <span className="py-4 mr-2 leading-none ">or</span>
-          <Link href="/login">
-            <a className="inline-block text-md  leading-none rounded hover:text-indigo-900 hover:bg-white px-2 py-4 mr-2 mt-4 lg:mt-0">
+          <div
+            onClick={() => setShowSignInModal(true)}
+            className="inline-block text-md  leading-none rounded hover:text-indigo-900 hover:bg-white px-2 py-4 mr-2 mt-4 lg:mt-0 cursor-pointer"
+          >
               Sign In
-            </a>
-          </Link>
+          </div>
           <Link href="/">
             <a className="inline-block text-md leading-none border rounded border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 p-4 mr-2 mt-4 lg:mt-0">
               Cart
@@ -67,6 +74,11 @@ export default () => {
           </Link>
         </div>
       </div>
+      {
+        showSignInModal
+          ? <SignInModal setShowSignInModal={setShowSignInModal} />
+          : null
+      }
     </nav>
   )
 }

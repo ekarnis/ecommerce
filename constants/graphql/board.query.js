@@ -13,7 +13,7 @@ const BOARD_QUERY = gql`
         description
         length_in_cm
         picture_url
-        price_in_usd
+        price_in_cad
         reviews {
           id
           user_id
