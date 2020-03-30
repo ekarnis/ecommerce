@@ -12,7 +12,7 @@ const BOARDS_QUERY = gql`
         }
         length_in_cm
         picture_url
-        price_in_usd
+        price_in_cad
         stock
         thickness_in_cm
         width_in_cm

@@ -12,11 +12,13 @@ const typeDefs = gql`
   type Wood {
     id: ID!
     name: String!
+    picture_url: String!
   }
 
   type Stain {
     id: ID!
     name: String!
+    picture_url: String!
   }
 
   type Board {
@@ -28,7 +30,7 @@ const typeDefs = gql`
     width_in_cm: Int!
     length_in_cm: Int!
     thickness_in_cm: Int!
-    price_in_usd: Int!
+    price_in_cad: Int!
     picture_url: String!
     description: String!
   }
