@@ -91,9 +91,7 @@ const resolvers = {
           .limit(1)
           .first()
       })
-
-
-      // Ideally i would want to use this but it keeps returning null...: .returning('*')
+      // TODO: Ideally i would want to use (.returning('*')) only but it keeps returning null...
     },
   }
 }

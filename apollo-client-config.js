@@ -17,7 +17,6 @@ export default withApollo(
     new ApolloClient({
       link: link,
       cache: new InMemoryCache()
-        .restore(initialState || {}),
-      connectToDevTools: true // TODO: turn this off for PRODs
+        .restore(initialState || {})
     })
 )
