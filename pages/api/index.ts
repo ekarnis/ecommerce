@@ -44,13 +44,6 @@ const resolvers = {
         .orderBy('helpful_votes', 'asc')
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
-    },
-    orders: (_parent, args, _context) => {
-      return db
-        .select('*')
-        .from('board_order')
-        .limit(Math.min(args.first, 50))
-        .offset(args.skip)
     }
   },
 
@@ -79,20 +72,30 @@ const resolvers = {
   },
 
   Mutation: {
-    addOrderToCart: (_parent, { boardId, quantity }, _context) => {
-      return db('board_order')
-      .insert({board_id: boardId, quantity: quantity})
-      .returning('*')
-      .then(function() {
-        return db
-          .select('*')
-          .from('board_order')
-          .orderBy('id', 'desc')
-          .limit(1)
-          .first()
-      })
+    addOrderToCart: (_parent, { userId, boardId, quantity }, _context) => {
+      let a=  db.select('id')
+        .from('orders')
+        .where({user_id: userId, placed: null})
+        .pluck('id')
+        .then((id) => {
+          return db('in_stock_order_items')
+          .insert({order_id: parseInt(id), board_id: boardId, quantity: quantity})
+          .returning('*')
+        });
+
+        console.log(getInfo(a));
+        return a;
       // TODO: Ideally i would want to use (.returning('*')) only but it keeps returning null...
     },
+  }
+}
+
+async function getInfo(prom) {
+  try {
+      await prom;
+      console.log(Promise.resolve(prom));
+  } catch (error) {
+      console.error(error);
   }
 }
 

@@ -95,3 +95,13 @@ VALUES (
     nulla pariatur. Excepteur sint occaecat cupidatat non proident,
     sunt in culpa qui officia deserunt mollit anim id est laborum.'
 );
+
+
+INSERT INTO orders (
+    user_id,
+    address_id
+)
+VALUES (
+    1,
+    1
+);
