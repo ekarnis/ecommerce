@@ -35,13 +35,14 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE orders (
+	  id smallserial PRIMARY KEY,
     user_id integer NOT NULL,
     address_id integer NOT NULL,
     placed timestamp,
     tracking_code varchar(500),
-    notes varchar(5000)
-
-    primary key (user_id, placed)
+    notes varchar(5000),
+ 
+    CONSTRAINT single_open_cart UNIQUE (user_id, placed)
 );
 
 CREATE TABLE in_stock_order_items (

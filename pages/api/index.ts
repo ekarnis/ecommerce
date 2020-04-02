@@ -73,29 +73,19 @@ const resolvers = {
 
   Mutation: {
     addOrderToCart: (_parent, { userId, boardId, quantity }, _context) => {
-      let a=  db.select('id')
+      return db.select('id')
         .from('orders')
-        .where({user_id: userId, placed: null})
+        .where({ user_id: 1, placed: null })
         .pluck('id')
         .then((id) => {
           return db('in_stock_order_items')
-          .insert({order_id: parseInt(id), board_id: boardId, quantity: quantity})
-          .returning('*')
-        });
-
-        console.log(getInfo(a));
-        return a;
-      // TODO: Ideally i would want to use (.returning('*')) only but it keeps returning null...
+            .insert({ order_id: parseInt(id), board_id: boardId, quantity: quantity })
+            .returning('id')
+            .then((id) => {
+              return { id: id[0], board_id: boardId, quantity: quantity }
+            })
+        })
     },
-  }
-}
-
-async function getInfo(prom) {
-  try {
-      await prom;
-      console.log(Promise.resolve(prom));
-  } catch (error) {
-      console.error(error);
   }
 }
 
@@ -108,7 +98,7 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => {
-    return { }
+    return {}
   }
 })
 
