@@ -9,6 +9,17 @@ const typeDefs = gql`
     reviews(first: Int = 25, skip: Int = 0): [Review!]!
   }
 
+  type Mutation {
+    addOrderToCart(userId: ID!, boardId: ID!, quantity: Int!) : ItemOrder
+  }
+
+  type ItemOrder {
+    id: ID!
+    order_id: ID! 
+    board_id: ID!
+    quantity: Int!
+  }
+
   type Wood {
     id: ID!
     name: String!

@@ -69,6 +69,23 @@ const resolvers = {
         .where({ board_id: board.id })
         .orderBy('helpful_votes', 'asc')
     }
+  },
+
+  Mutation: {
+    addOrderToCart: (_parent, { userId, boardId, quantity }, _context) => {
+      return db.select('id')
+        .from('orders')
+        .where({ user_id: 1, placed: null })
+        .pluck('id')
+        .then((id) => {
+          return db('in_stock_order_items')
+            .insert({ order_id: parseInt(id), board_id: boardId, quantity: quantity })
+            .returning('id')
+            .then((id) => {
+              return { id: id[0], board_id: boardId, quantity: quantity }
+            })
+        })
+    },
   }
 }
 
@@ -81,7 +98,7 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => {
-    return { }
+    return {}
   }
 })
 

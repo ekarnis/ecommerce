@@ -34,4 +34,34 @@ CREATE TABLE reviews (
     content VARCHAR (5000) 
 );
 
+CREATE TABLE orders (
+	  id smallserial PRIMARY KEY,
+    user_id integer NOT NULL,
+    address_id integer NOT NULL,
+    placed timestamp,
+    tracking_code varchar(500),
+    notes varchar(5000),
+ 
+    CONSTRAINT single_open_cart UNIQUE (user_id, placed)
+);
+
+CREATE TABLE in_stock_order_items (
+    id smallserial PRIMARY KEY,
+    order_id integer NOT NULL REFERENCES orders (id),
+    board_id integer NOT NULL REFERENCES boards (id),
+    quantity integer NOT NULL
+);
+
+CREATE TABLE custom_order_items (
+    id smallserial PRIMARY KEY,
+    order_id integer REFERENCES orders (id),
+    stain_id integer NOT NULL REFERENCES stains (id),
+    wood_id integer NOT NULL REFERENCES woods (id),
+    width_in_cm smallint NOT NULL CHECK (width_in_cm > 0),
+    length_in_cm smallint NOT NULL CHECK (length_in_cm > 0),
+    thickness_in_cm smallint NOT NULL CHECK (thickness_in_cm > 0),
+    price_in_cad smallint NOT NULL CHECK (price_in_cad > 0),
+    quantity integer
+);
+
 -- TODO: make this a knex migration
