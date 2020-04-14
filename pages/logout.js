@@ -1,6 +1,6 @@
 import Layout from '../components/Layout'
 
-const Logout = () => {
+const Index = () => {
   return (
     <Layout>
       <h1 className="text-6xl mb-16">You have been logged out</h1>
@@ -8,4 +8,4 @@ const Logout = () => {
   )
 }
 
-export default Logout
+export default Index

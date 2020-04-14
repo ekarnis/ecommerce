@@ -1,9 +1,9 @@
 import Header from './Header'
-import { Auth0Provider } from '../react-auth0-spa'
-import config from '../pages/auth_config.json'
+import { Auth0Provider } from '../auth/react-auth0-spa'
+import config from '../auth/auth_config.json'
 import { useRouter } from 'next/router'
 
-import LOGIN_REDIRECT from '../loginRedirectCallback'
+import LOGIN_REDIRECT from '../auth/loginRedirectCallback'
 
 const Layout = ({ children }) => {
   const router = useRouter()
@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
     <Auth0Provider
       domain={config.domain}
       client_id={config.clientId}
-      redirect_uri={process.env.REDIRECT_URI}
+      redirect_uri={process.env.REACT_APP_REDIRECT_URI}
       onRedirectCallback={LOGIN_REDIRECT(router)}
     >
       <div className="flex flex-col h-screen">

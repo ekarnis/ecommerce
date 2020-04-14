@@ -1,4 +1,4 @@
-import { useAuth0 } from '../react-auth0-spa'
+import { useAuth0 } from '../auth/react-auth0-spa'
 import Link from 'next/link'
 import Cookies from 'universal-cookie'
 import { useRouter } from 'next/router'
