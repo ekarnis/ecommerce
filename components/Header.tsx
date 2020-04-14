@@ -1,11 +1,12 @@
-import { useState } from 'react'
-
+import { useAuth0 } from '../react-auth0-spa'
 import Link from 'next/link'
-
-import SignInModal from './SignInModal'
+import Cookies from 'universal-cookie'
+import { useRouter } from 'next/router'
 
 export default () => {
-  const [showSignInModal, setShowSignInModal] = useState(false)
+  const { loading, isAuthenticated, loginWithRedirect, logout } = useAuth0()
+  const cookies = new Cookies()
+  const router = useRouter()
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-indigo-900 p-2">
@@ -55,18 +56,22 @@ export default () => {
           ></input>
         </div>
         <div className="flex justify-between flex-shrink-0 text-white">
-          <Link href="/">
-            <a className="inline-block text-md leading-none rounded hover:text-indigo-900 hover:bg-white px-2 py-4 mr-2 mt-4 lg:mt-0">
-              Register
-            </a>
-          </Link>
-          <span className="py-4 mr-2 leading-none ">or</span>
-          <div
-            onClick={() => setShowSignInModal(true)}
-            className="inline-block text-md  leading-none rounded hover:text-indigo-900 hover:bg-white px-2 py-4 mr-2 mt-4 lg:mt-0 cursor-pointer"
-          >
-              Sign In
-          </div>
+          {!isAuthenticated && (
+            <div onClick={() => {
+              cookies.set('loginRedirctPath', router.pathname, { path: '/' })
+              if (loading === false) { loginWithRedirect({}) }
+            }}
+            className="inline-block text-md  leading-none rounded hover:text-indigo-900 hover:bg-white px-2 py-4 mr-2 mt-4 lg:mt-0 cursor-pointer">
+                Sign In / Sign Up
+            </div>
+          )}
+
+          {isAuthenticated && (
+            <div onClick={() => logout({ returnTo: 'http://localhost:3000/logout' })}
+              className="inline-block text-md  leading-none rounded hover:text-indigo-900 hover:bg-white px-2 py-4 mr-2 mt-4 lg:mt-0 cursor-pointer">
+              Log out
+            </div>)}
+
           <Link href="/">
             <a className="inline-block text-md leading-none border rounded border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 p-4 mr-2 mt-4 lg:mt-0">
               Cart
@@ -74,11 +79,6 @@ export default () => {
           </Link>
         </div>
       </div>
-      {
-        showSignInModal
-          ? <SignInModal setShowSignInModal={setShowSignInModal} />
-          : null
-      }
     </nav>
   )
 }

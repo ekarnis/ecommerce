@@ -4,7 +4,7 @@ import BOARDS_QUERY from '../constants/graphql/boards.query'
 import Layout from '../components/Layout'
 import InStockBox from '../components/InStockBox'
 
-const Index = () => {
+const InStock = () => {
   const { data, loading, error } = useQuery(BOARDS_QUERY)
   if (loading) {
     return <p>Loading...</p>
@@ -27,4 +27,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default InStock
