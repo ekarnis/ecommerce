@@ -1,19 +1,18 @@
 import Header from './Header'
 import { Auth0Provider } from '../auth/react-auth0-spa'
-import config from '../auth/auth_config.json'
 import { useRouter } from 'next/router'
 
-import LOGIN_REDIRECT from '../auth/loginRedirectCallback'
+import LoginRedirectCallback from '../auth/loginRedirectCallback'
 
 const Layout = ({ children }) => {
   const router = useRouter()
 
   return (
     <Auth0Provider
-      domain={config.domain}
-      client_id={config.clientId}
-      redirect_uri={process.env.REACT_APP_REDIRECT_URI}
-      onRedirectCallback={LOGIN_REDIRECT(router)}
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
+      redirect_uri={process.env.REACT_APP_BASE_URL + "/redirect-login"}
+      onRedirectCallback={LoginRedirectCallback(router)}
     >
       <div className="flex flex-col h-screen">
         <Header />
