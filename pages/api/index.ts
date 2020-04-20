@@ -44,6 +44,13 @@ const resolvers = {
         .orderBy('helpful_votes', 'asc')
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
+    },
+    order: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('orders')
+        .where({ id: args.id })
+        .first()
     }
   },
 
@@ -71,21 +78,69 @@ const resolvers = {
     }
   },
 
+  Order: {
+    in_stock_order_items: (order, args, _context) => {
+      return db
+        .select('*')
+        .from('in_stock_order_items')
+        .where({ order_id: order.id })
+        .orderBy('id', 'asc')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
+    },
+    custom_order_items: (order, args, _context) => {
+      return db
+        .select('*')
+        .from('custom_order_items')
+        .where({ order_id: order.id })
+        .orderBy('id', 'asc')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
+    }
+  },
+
+  In_Stock_Order_Item: {
+    board: (in_stock_order_item, args, _context) => {
+      return db
+        .select('*')
+        .from('boards')
+        .where({ id: in_stock_order_item.board_id })
+        .first()
+    }
+  },
+
+  Custom_Order_Item: {
+    stain: (custom_order_item, args, _context) => {
+      return db
+        .select('*')
+        .from('stains')
+        .where({ id: custom_order_item.stain_id })
+        .first()
+    },
+    wood: (custom_order_item, args, _context) => {
+      return db
+        .select('*')
+        .from('woods')
+        .where({ id: custom_order_item.wood_id })
+        .first()
+    }
+  },
+
   Mutation: {
     addOrderToCart: (_parent, { userId, boardId, quantity }, _context) => {
       return db.select('id')
         .from('orders')
-        .where({ user_id: 1, placed: null })
+        .where({ user_id: userId, placed: null })
         .pluck('id')
-        .then((id) => {
+        .then(id => {
           return db('in_stock_order_items')
             .insert({ order_id: parseInt(id), board_id: boardId, quantity: quantity })
             .returning('id')
-            .then((id) => {
+            .then(id => {
               return { id: id[0], board_id: boardId, quantity: quantity }
             })
         })
-    },
+    }
   }
 }
 

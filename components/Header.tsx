@@ -72,7 +72,7 @@ export default () => {
               Log out
             </div>)}
 
-          <Link href="/">
+          <Link href="/cart">
             <a className="inline-block text-md leading-none border rounded border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 p-4 mr-2 mt-4 lg:mt-0">
               Cart
             </a>

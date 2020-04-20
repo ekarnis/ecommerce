@@ -27,10 +27,10 @@ export default props => {
         setToastMessage('error ☹️, item was not able to be added to the cart')
         setIsVisible(true)
         setToastType('ERROR')
-        console.log(err)
+        console.error(err)
       })
       .then(function () {
-        delay(1000).then(function () {
+        delay(5000).then(function () {
           setToastMessage('')
           setIsVisible(false)
           setToastType('INFORMATIONAL')
@@ -47,12 +47,12 @@ export default props => {
             props.id
         }
       >
-        <div>
+        <div className="flex flex-col items-center mb-4">
           <h3 className="text-3xl font-bold text-indigo-500">{props.wood.name}</h3>
-          <span>
+          <div>
             {props.width_in_cm}cm x {props.length_in_cm}cm x {props.thickness_in_cm}cm
-          </span>
-          <span className="mb-4">{props.stain.name}</span>
+          </div>
+          <div className="mb-4">{props.stain.name}</div>
           <img src={props.picture_url}></img>
         </div>
       </Link>
