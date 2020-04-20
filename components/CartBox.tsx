@@ -11,7 +11,7 @@ export default props => {
 
   return (
     <div
-      className="w-3/5 flex justify-between items-center py-1 px-4 m-2 border border-gray-200 bg-white rounded-lg shadow-md"
+      className="w-full flex justify-between items-center py-1 px-4 m-2 border border-gray-200 bg-white rounded-lg shadow-md"
     >
       <img className="m-1 w-32" src={pictureURL}></img>
       <span className="flex items-center">

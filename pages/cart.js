@@ -34,32 +34,26 @@ const Cart = () => {
 
     const subTotal = data.order.in_stock_order_items
       ? data.order.in_stock_order_items.reduce(
-          (accumulator, inStockOrderItem) =>
-            accumulator + inStockOrderItem.board.price_in_cad
+          (accumulator, inStockOrderItem) => {
+            return accumulator + inStockOrderItem.board.price_in_cad
+          },
+          0
         )
       : 0 + data.order.custom_order_items
-      ? data.order.custom_order_items.reduce(
-          (accumulator, customOrderItem) =>
-            accumulator + customOrderItem.price_in_cad
-        )
+      ? data.order.custom_order_items.reduce((accumulator, customOrderItem) => {
+          return accumulator + customOrderItem.price_in_cad
+        }, 0)
       : 0
-
-    data.order.in_stock_order_items.reduce((accumulator, inStockOrderItem) => {
-      const x = accumulator + inStockOrderItem.board.price_in_cad
-      console.log(x)
-      console.log(inStockOrderItem.board.price_in_cad)
-      return x
-    })
 
     return (
       <Layout>
         <h1 className='text-6xl mb-16'>Your Cart</h1>
-        <div className=' w-full flex items-start'>
-          <div className='flex flex-col w-full items-center'>
+        <div className=' w-full flex items- justify-center'>
+          <div className='flex flex-col w-3/5 mr-4 items-center'>
             {inStockBoxes}
             {customBoxes}
           </div>
-          <CheckoutBox subTotal={subTotal} />
+          <CheckoutBox subTotal={subTotal} taxRate={0.15} shipping={15} />
         </div>
       </Layout>
     )
