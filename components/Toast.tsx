@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 const Toast = props => {
-  const getToastColor = (toastType) => {
+  const getToastColor = toastType => {
     if (toastType === 'SUCCESS') return 'green'
     if (toastType === 'ERROR') return 'red'
     if (toastType === 'INFORMATIONAL') return 'blue'
@@ -9,7 +9,9 @@ const Toast = props => {
   }
 
   return (
-    <div className={'alert-toast fixed bottom-0 right-0 m-8 w-5/6 md:w-full max-w-sm ' + props.isVisible ? 'visible' : 'invisible'}>
+    <div className={
+      `alert-toast fixed bottom-0 right-0 m-8 w-5/6 md:w-full max-w-sm ${props.isVisible ? 'visible' : 'invisible'}`
+    }>
       <input type='checkbox' className='hidden' id='footertoast' />
       <label className={'close cursor-pointer flex items-start justify-between w-full p-2 bg-' + getToastColor(props.toastType) + '-500 h-24 rounded shadow-lg text-white'} title='close'>
         {props.toastMessage}
