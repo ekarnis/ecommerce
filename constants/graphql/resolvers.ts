@@ -157,8 +157,9 @@ const resolvers = {
                     .then(inStockOrderId => {
                       return {
                         id: inStockOrderId[0],
-                        board_id: boardId,
-                        quantity: quantity
+                        board_id: parseInt(boardId),
+                        order_id: parseInt(orderId),
+                        quantity: quantity + exisitingOrder.quantity
                       }
                     })
                 } else {
@@ -174,6 +175,7 @@ const resolvers = {
                       return {
                         id: inStockOrderId[0],
                         board_id: boardId,
+                        order_id: parseInt(orderId),
                         quantity: quantity
                       }
                     })

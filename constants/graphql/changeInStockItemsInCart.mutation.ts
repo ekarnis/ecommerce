@@ -12,6 +12,7 @@ const CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION = gql`
       quantity: $quantity
     ) {
       id
+      quantity
     }
   }
 `

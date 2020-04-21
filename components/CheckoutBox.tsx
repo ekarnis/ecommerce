@@ -35,7 +35,7 @@ export default props => {
           <span className="text-lg font-bold text-indigo-500">
           Shipping
           </span>
-          <span>${props.shipping}</span>
+          <span>{props.shipping > 0 ? '$' + props.shipping : 'Free!'}</span>
         </div>
 
         <hr className="border-gray-300 m-2 w-full"/>
