@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import STAINS_QUERY from '../constants/graphql/stains.query'
+import STAINS_QUERY from '../graphql/queries/stains.query'
 
 import OptionBox from './OptionBox'
 

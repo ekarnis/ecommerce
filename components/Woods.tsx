@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import WOODS_QUERY from '../constants/graphql/woods.query'
+import WOODS_QUERY from '../graphql/queries/woods.query'
 
 import OptionBox from './OptionBox'
 
