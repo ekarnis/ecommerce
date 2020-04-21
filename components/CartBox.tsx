@@ -1,6 +1,48 @@
+import { useState } from 'react'
+
+import { useMutation } from '@apollo/react-hooks'
+import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../constants/graphql/changeInStockItemsInCart.mutation'
+
+import Toast from '../components/Toast'
 import PrimaryButton from '../components/PrimaryButton'
 
 export default props => {
+  const [changeInStockItemsInCart] = useMutation(CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION)
+
+  const [isVisible, setIsVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastType, setToastType] = useState('INFORMATIONAL')
+
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+  const changeInStockItemsInCartOnClick = newQuantity => {
+    changeInStockItemsInCart({
+      variables: {
+        userId: 1,
+        boardId: props.board.id,
+        quantity: newQuantity
+      }
+    })
+      .then(() => {
+        setToastMessage('Success! Item was added to the cart')
+        setIsVisible(true)
+        setToastType('SUCCESS')
+      })
+      .catch(error => {
+        console.error('onCartClick -> error', error)
+        setToastMessage('error ☹️, item was not added to the cart')
+        setIsVisible(true)
+        setToastType('ERROR')
+      })
+      .then(() => {
+        delay(5000).then(() => {
+          setToastMessage('')
+          setIsVisible(false)
+          setToastType('INFORMATIONAL')
+        })
+      })
+  }
+
   const wood = props.board.wood ? props.board.wood : props.wood
   const stain = props.board.stain ? props.board.stain : props.stain
   const width = props.board.width_in_cm ? props.board.width_in_cm : props.width_in_cm
@@ -23,16 +65,29 @@ export default props => {
       </span>
       <span>
         <PrimaryButton
-          onClick={() => {}}
           buttonText={'-'}
+          onClick={() =>
+            props.quantity > 1
+              ? changeInStockItemsInCartOnClick(-1)
+              : null
+          }
         />
-        {props.quantity}
+        <span>{props.quantity}</span>
         <PrimaryButton
-          onClick={() => {}}
           buttonText={'+'}
+          onClick={() =>
+            props.quantity < 100
+              ? changeInStockItemsInCartOnClick(1)
+              : null
+          }
         />
         ${price} CAD
       </span>
+      <Toast
+        isVisible={isVisible}
+        toastMessage={toastMessage}
+        toastType={toastType}
+      />
     </div>
   )
 }
