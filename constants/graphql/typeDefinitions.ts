@@ -11,7 +11,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addOrderToCart(userId: ID!, boardId: ID!, quantity: Int!): ItemOrder
+    changeInStockItemsInCart(userId: ID!, boardId: ID!, quantity: Int!): ItemOrder
   }
 
   type ItemOrder {

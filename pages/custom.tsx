@@ -7,8 +7,8 @@ import Sizes from '../components/Sizes'
 
 const Index = () => {
   const [stage, setStage] = useState(0)
-  const [wood, setWood] = useState({})
-  const [stain, setStain] = useState({})
+  const [wood, setWood] = useState({ name: '' })
+  const [stain, setStain] = useState({ name: '' })
   const [widthInCm, setWidthInCm] = useState(0)
   const [lengthInCm, setLengthInCm] = useState(0)
   const [thicknessInCm, setThicknessInCm] = useState(0)
@@ -77,7 +77,7 @@ const Index = () => {
         </div>
       </div>
 
-      {wood.name !== undefined && stage < 1 || stain.name !== undefined && stage < 2
+      {(wood.name !== undefined && stage < 1) || (stain.name !== undefined && stage < 2)
         ? <button
           onClick={() => setStage(stage + 1)}
           className="fixed right-0 rounded-full h-16 w-16 mr-2 flex items-center justify-center inline-block text-md px-4 py-2 leading-none border text-indigo-500 border-indigo-500 bg-white hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4"

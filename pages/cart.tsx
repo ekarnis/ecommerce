@@ -11,7 +11,6 @@ const Cart = () => {
       order_id: 1
     }
   })
-  console.log('Cart -> data', data)
 
   if (loading) {
     return <p>Loading...</p>
@@ -32,18 +31,31 @@ const Cart = () => {
       <CartBox key={customOrderItem.id} {...customOrderItem}></CartBox>
     ))
 
+    const totalItemNumber = data.order.in_stock_order_items
+      ? data.order.in_stock_order_items.reduce(
+        (accumulator, inStockOrderItem) => {
+          return accumulator + inStockOrderItem.quantity
+        },
+        0
+      )
+      : 0 + data.order.custom_order_items
+        ? data.order.custom_order_items.reduce((accumulator, customOrderItem) => {
+          return accumulator + customOrderItem.quantity
+        }, 0)
+        : 0
+
     const subTotal = data.order.in_stock_order_items
       ? data.order.in_stock_order_items.reduce(
-          (accumulator, inStockOrderItem) => {
-            return accumulator + inStockOrderItem.board.price_in_cad
-          },
-          0
-        )
+        (accumulator, inStockOrderItem) => {
+          return accumulator + inStockOrderItem.quantity * inStockOrderItem.board.price_in_cad
+        },
+        0
+      )
       : 0 + data.order.custom_order_items
-      ? data.order.custom_order_items.reduce((accumulator, customOrderItem) => {
+        ? data.order.custom_order_items.reduce((accumulator, customOrderItem) => {
           return accumulator + customOrderItem.price_in_cad
         }, 0)
-      : 0
+        : 0
 
     return (
       <Layout>
@@ -53,7 +65,12 @@ const Cart = () => {
             {inStockBoxes}
             {customBoxes}
           </div>
-          <CheckoutBox subTotal={subTotal} taxRate={0.15} shipping={15} />
+          <CheckoutBox
+            totalItemNumber={totalItemNumber}
+            subTotal={subTotal}
+            taxRate={0.15}
+            shipping={15}
+          />
         </div>
       </Layout>
     )
