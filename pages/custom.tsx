@@ -1,18 +1,71 @@
 import { useState } from 'react'
 
+import { useMutation } from '@apollo/react-hooks'
+
+import ADD_CUSTOM_ITEM_TO_CART_MUTATION from '../graphql/mutations/addCustomItemToCart'
+
 import Layout from '../components/Layout'
 import Woods from '../components/Woods'
 import Stains from '../components/Stains'
 import Sizes from '../components/Sizes'
+import Toast from '../components/Toast'
 
 const Index = () => {
   const [stage, setStage] = useState(0)
-  const [wood, setWood] = useState({ name: '' })
-  const [stain, setStain] = useState({ name: '' })
+  const [wood, setWood] = useState({ name: '', id: null })
+  const [stain, setStain] = useState({ name: '', id: null })
   const [widthInCm, setWidthInCm] = useState(0)
   const [lengthInCm, setLengthInCm] = useState(0)
   const [thicknessInCm, setThicknessInCm] = useState(0)
   const [unit, setUnit] = useState('Centimeters')
+
+  const [addCustomItemToCart] = useMutation(ADD_CUSTOM_ITEM_TO_CART_MUTATION)
+
+  const [isVisible, setIsVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastType, setToastType] = useState('INFORMATIONAL')
+
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+  const conditionallyConvertStringToNumber = input =>
+    typeof input === 'string'
+      ? parseInt(input)
+      : typeof input === 'number'
+        ? input
+        : null
+
+  const addCustomItemToCartOnClick = () => {
+    addCustomItemToCart({
+      variables: {
+        userId: 1,
+        stainId: conditionallyConvertStringToNumber(stain.id),
+        woodId: conditionallyConvertStringToNumber(wood.id),
+        widthInCm: conditionallyConvertStringToNumber(widthInCm),
+        lengthInCm: conditionallyConvertStringToNumber(lengthInCm),
+        thicknessInCm: conditionallyConvertStringToNumber(thicknessInCm),
+        quantity: 1
+      }
+    })
+      .then(response => {
+        console.log('changeCustomItemsInCartOnClick -> response', response)
+        setToastMessage('Success! Item was added to the cart')
+        setIsVisible(true)
+        setToastType('SUCCESS')
+      })
+      .catch(error => {
+        console.error('addToCartClick -> error', error)
+        setToastMessage('error ☹️, item was not added to the cart')
+        setIsVisible(true)
+        setToastType('ERROR')
+      })
+      .then(() => {
+        delay(5000).then(() => {
+          setToastMessage('')
+          setIsVisible(false)
+          setToastType('INFORMATIONAL')
+        })
+      })
+  }
 
   return (
     <Layout>
@@ -92,10 +145,16 @@ const Index = () => {
         ? <button
           className="fixed right-0 rounded mr-4 flex items-center justify-center inline-block text-md p-4 leading-none border text-indigo-500 border-indigo-500 bg-white hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4"
           style={{ top: '50%' }}
+          onClick={addCustomItemToCartOnClick}
         >
           <span className="text-2xl">Add to Cart</span>
         </button>
         : null}
+      <Toast
+        isVisible={isVisible}
+        toastMessage={toastMessage}
+        toastType={toastType}
+      />
     </Layout>
   )
 }

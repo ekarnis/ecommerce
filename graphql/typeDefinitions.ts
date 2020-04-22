@@ -12,6 +12,16 @@ const typeDefs = gql`
 
   type Mutation {
     changeInStockItemsInCart(userId: ID!, boardId: ID!, quantity: Int!): ItemOrder
+    addCustomItemToCart(
+        userId: ID!
+        stainId: ID
+        woodId: ID
+        widthInCm: Int
+        lengthInCm: Int
+        thicknessInCm: Int
+        quantity: Int
+      ): CustomItemInCart
+      updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
   }
 
   type ItemOrder {
@@ -19,6 +29,12 @@ const typeDefs = gql`
     order_id: ID!
     board_id: ID!
     quantity: Int!
+  }
+
+  type CustomItemInCart{
+    id: ID!
+    order_id: ID
+    quantity: Int
   }
 
   type Wood {

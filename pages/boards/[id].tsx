@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useState } from 'react'
 
-import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../../graphql/mutations/changeInStockItemsInCart.mutation'
+import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../../graphql/mutations/changeInStockItemsInCart'
 import BOARD_QUERY from '../../graphql/queries/board.query'
 
 import Layout from '../../components/Layout'
@@ -15,6 +15,7 @@ export default function Board () {
   const router = useRouter()
 
   const [quantity, setQuantity] = useState(1)
+
   const [isVisible, setIsVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [toastType, setToastType] = useState('INFORMATIONAL')

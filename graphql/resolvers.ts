@@ -183,6 +183,94 @@ const resolvers = {
               }
             )
         })
+    },
+    addCustomItemToCart: (_parent, {
+      userId, stainId, woodId, widthInCm, lengthInCm, thicknessInCm, quantity
+    }, _context) => {
+      console.log('userId, stainId, woodId, widthInCm, lengthInCm, thicknessInCm, quantity', userId, stainId, woodId, widthInCm, lengthInCm, thicknessInCm, quantity)
+      // get order id so you know which order to check
+      return db.select('id')
+        .from('orders')
+        .where({ user_id: userId, placed: null })
+        .pluck('id')
+        .then(orderId => {
+          // check order if item is already in it
+          return db.select('*')
+            .from('custom_order_items')
+            .where({
+              order_id: parseInt(orderId),
+              stain_id: parseInt(stainId),
+              wood_id: parseInt(woodId),
+              width_in_cm: widthInCm,
+              length_in_cm: lengthInCm,
+              thickness_in_cm: thicknessInCm
+            })
+            .first()
+            .then(
+              exisitingOrder => {
+                // if it is then update quantity
+                if (exisitingOrder) {
+                  return db('custom_order_items')
+                    .where({
+                      order_id: parseInt(orderId),
+                      stain_id: parseInt(stainId),
+                      wood_id: parseInt(woodId),
+                      width_in_cm: widthInCm,
+                      length_in_cm: lengthInCm,
+                      thickness_in_cm: thicknessInCm
+                    })
+                    .update({ quantity: quantity + exisitingOrder.quantity })
+                    .returning('id')
+                    .then(customOrderId => {
+                      return {
+                        id: customOrderId[0],
+                        order_id: orderId,
+                        quantity: quantity + exisitingOrder.quantity
+                      }
+                    })
+                } else {
+                  // if not add item to order
+                  return db('custom_order_items')
+                    .insert({
+                      order_id: parseInt(orderId),
+                      stain_id: parseInt(stainId),
+                      wood_id: parseInt(woodId),
+                      width_in_cm: widthInCm,
+                      length_in_cm: lengthInCm,
+                      thickness_in_cm: thicknessInCm,
+                      price_in_cad: 1, // TODO make function to determine this
+                      quantity: 1
+                    })
+                    .returning('id')
+                    .then(customOrderId => {
+                      return {
+                        id: customOrderId[0],
+                        order_id: orderId,
+                        quantity: quantity
+                      }
+                    })
+                }
+              }
+            )
+        })
+    },
+    updateCustomItemInCart: (_parent, { id, newQuantity }, _context) => {
+      return db('custom_order_items')
+        .where({
+          id: parseInt(id)
+        })
+        .update({ quantity: newQuantity })
+        .returning('quantity')
+        .then(quantity => {
+          console.log('', {
+            id: id,
+            quantity: quantity
+          })
+          return {
+            id: id,
+            quantity: quantity[0]
+          }
+        })
     }
   }
 }
