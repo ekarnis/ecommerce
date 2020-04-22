@@ -14,6 +14,7 @@ const Index = () => {
   const [stage, setStage] = useState(0)
   const [wood, setWood] = useState({ name: '', id: null })
   const [stain, setStain] = useState({ name: '', id: null })
+
   const [widthInCm, setWidthInCm] = useState(0)
   const [lengthInCm, setLengthInCm] = useState(0)
   const [thicknessInCm, setThicknessInCm] = useState(0)
@@ -146,6 +147,7 @@ const Index = () => {
           className="fixed right-0 rounded mr-4 flex items-center justify-center inline-block text-md p-4 leading-none border text-indigo-500 border-indigo-500 bg-white hover:border-transparent hover:text-white hover:bg-indigo-500 mt-4"
           style={{ top: '50%' }}
           onClick={addCustomItemToCartOnClick}
+
         >
           <span className="text-2xl">Add to Cart</span>
         </button>
