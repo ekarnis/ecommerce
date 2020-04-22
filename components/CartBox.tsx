@@ -1,6 +1,24 @@
+
+import { useMutation } from '@apollo/react-hooks'
+import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../constants/graphql/changeInStockItemsInCart.mutation'
+
 import PrimaryButton from '../components/PrimaryButton'
 
 export default props => {
+  const [changeInStockItemsInCart] = useMutation(CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION)
+
+  const changeInStockItemsInCartOnClick = (newQuantity, boardId) => {
+    changeInStockItemsInCart({
+      variables: {
+        userId: 1,
+        boardId: boardId,
+        quantity: newQuantity
+      }
+    }).then(() => props.refetch())
+  }
+
+  // translation so it'll work with custom and in stock boards
+
   const wood = props.board.wood ? props.board.wood : props.wood
   const stain = props.board.stain ? props.board.stain : props.stain
   const width = props.board.width_in_cm ? props.board.width_in_cm : props.width_in_cm
@@ -23,13 +41,21 @@ export default props => {
       </span>
       <span>
         <PrimaryButton
-          onClick={() => {}}
           buttonText={'-'}
+          onClick={() =>
+            props.quantity > 1
+              ? changeInStockItemsInCartOnClick(-1, props.board.id)
+              : null
+          }
         />
-        {props.quantity}
+        <span>{props.quantity}</span>
         <PrimaryButton
-          onClick={() => {}}
           buttonText={'+'}
+          onClick={() =>
+            props.quantity < 100
+              ? changeInStockItemsInCartOnClick(1, props.board.id)
+              : null
+          }
         />
         ${price} CAD
       </span>

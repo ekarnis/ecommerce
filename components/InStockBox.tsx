@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import { useState } from 'react'
+
 import { useMutation } from '@apollo/react-hooks'
-import ADD_TO_CART_MUTATION from '../constants/graphql/cart.mutation'
+import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../constants/graphql/changeInStockItemsInCart.mutation'
 
 import Toast from '../components/Toast'
 import PrimaryButton from '../components/PrimaryButton'
 
 export default props => {
-  const [addToCart, { data }] = useMutation(ADD_TO_CART_MUTATION)
+  const [changeInStockItemsInCart] = useMutation(CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION)
 
   const [isVisible, setIsVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
@@ -15,22 +16,21 @@ export default props => {
 
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-  const onCartClick = () => {
-    addToCart({ variables: { userId: 1, boardId: props.id, quantity: 1 } })
-      .then(function (response) {
+  const changeInStockItemsInCartOnClick = () => {
+    changeInStockItemsInCart({ variables: { userId: 1, boardId: props.id, quantity: 1 } })
+      .then(() => {
         setToastMessage('Success! Item was added to the cart')
         setIsVisible(true)
         setToastType('SUCCESS')
-        console.log(response)
       })
-      .catch(function (err) {
-        setToastMessage('error ☹️, item was not able to be added to the cart')
+      .catch(error => {
+        console.error('onCartClick -> error', error)
+        setToastMessage('error ☹️, item was not added to the cart')
         setIsVisible(true)
         setToastType('ERROR')
-        console.error(err)
       })
-      .then(function () {
-        delay(5000).then(function () {
+      .then(() => {
+        delay(5000).then(() => {
           setToastMessage('')
           setIsVisible(false)
           setToastType('INFORMATIONAL')
@@ -56,8 +56,15 @@ export default props => {
           <img src={props.picture_url}></img>
         </div>
       </Link>
-      <PrimaryButton onClick={e => onCartClick() } buttonText={'Add to Cart'} />
-      <Toast isVisible={isVisible} toastMessage={toastMessage} toastType={toastType}/>
+      <PrimaryButton
+        onClick={ changeInStockItemsInCartOnClick }
+        buttonText={'Add to Cart'}
+      />
+      <Toast
+        isVisible={isVisible}
+        toastMessage={toastMessage}
+        toastType={toastType}
+      />
     </a>
   )
 }
