@@ -42,7 +42,7 @@ export default () => {
               In Stock
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/contact-us">
             <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200">
               Contact Us
             </a>
