@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import BOARDS_QUERY from '../constants/graphql/boards.query'
+import BOARDS_QUERY from '../graphql/queries/boards.query'
 
 import Layout from '../components/Layout'
 import InStockBox from '../components/InStockBox'

@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import ORDER_QUERY from '../constants/graphql/order.query'
+import ORDER_QUERY from '../graphql/queries/order.query'
 
 import Layout from '../components/Layout'
 import CartBox from '../components/CartBox'
@@ -14,11 +14,33 @@ const Cart = () => {
   })
 
   if (loading) {
-    return <p>Loading...</p>
+    return (
+      <Layout>
+        <h1 className='text-6xl mb-16'>Your Cart</h1>
+        <div className=' w-full flex items- justify-center'>
+          <div className='flex flex-col w-3/5 mr-4 items-center'>
+            <p>Loading...</p>
+          </div>
+          <CheckoutBox
+            totalItemNumber={0}
+            subTotal={0}
+            taxRate={0}
+            shipping={0}
+          />
+        </div>
+      </Layout>
+    )
   }
 
   if (error) {
-    return <p>Error: {JSON.stringify(error)}</p>
+    return (
+      <Layout>
+        <h1 className='text-6xl mb-16'>Your Cart</h1>
+        <div className=' w-full flex items- justify-center'>
+          <p>Error: {JSON.stringify(error)}</p>
+        </div>
+      </Layout>
+    )
   }
 
   if (data) {
@@ -28,7 +50,7 @@ const Cart = () => {
           key={inStockOrderItem.id}
           refetch={refetch}
           {...inStockOrderItem}
-        ></CartBox>
+        />
       )
     )
 
@@ -37,7 +59,7 @@ const Cart = () => {
         key={customOrderItem.id}
         refetch={refetch}
         {...customOrderItem}
-      ></CartBox>
+      />
     ))
 
     const sumArrayProperties = (array, property) => {

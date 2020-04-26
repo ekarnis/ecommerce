@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import { useMutation } from '@apollo/react-hooks'
-import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../constants/graphql/changeInStockItemsInCart.mutation'
+
+import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../graphql/mutations/changeInStockItemsInCart'
 
 import Toast from '../components/Toast'
 import PrimaryButton from '../components/PrimaryButton'
