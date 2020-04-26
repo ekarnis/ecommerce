@@ -12,6 +12,7 @@ const typeDefs = gql`
 
   type Mutation {
     changeInStockItemsInCart(userId: ID!, boardId: ID!, quantity: Int!): ItemOrder
+    addNewAppUser(authUserId: String!, email: String!, nickname: String): AppUser
   }
 
   type ItemOrder {
@@ -83,6 +84,13 @@ const typeDefs = gql`
     thickness_in_cm: Int!
     price_in_cad: Int!
     quantity: Int!
+  }
+
+  type AppUser {
+    id: ID!
+    auth_user_id: String!
+    email: String!
+    nickname: String
   }
 `
 export default typeDefs

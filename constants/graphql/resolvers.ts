@@ -183,6 +183,27 @@ const resolvers = {
               }
             )
         })
+    },
+
+    addNewAppUser: (_parent, { authUserId, email, nickname }, _context) => {
+      return db.select('*')
+        .from('app_users')
+        .where({ auth_user_id: authUserId })
+        .first()
+        .then(app_user => {
+          // if app_user doesnt' exist then create one
+          if (app_user && app_user.auth_user_id === authUserId) return app_user
+          return db('app_users')
+            .insert({
+              auth_user_id: authUserId,
+              email: email,
+              nickname: nickname
+            })
+            .returning('*')
+            .then(newAppUser => {
+              return newAppUser[0]
+            })
+        })
     }
   }
 }
