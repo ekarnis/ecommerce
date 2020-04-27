@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie'
 import { useMutation } from '@apollo/react-hooks'
-import ADD_NEW_APP_USER from '../constants/graphql/addNewAppUser.mutation'
+import ADD_NEW_APP_USER from '../graphql/mutations/addNewAppUser.mutation'
 
 // A function that routes the user to the right place after login
 const LoginRedirectCallback = (nextRouter) => {
