@@ -2,19 +2,19 @@ import gql from 'graphql-tag'
 
 const ADD_NEW_APP_USER = gql`
   mutation AddNewAppUser(
-    $authUserId: String!
+    $auth0UserId: ID!
     $email: String!
-    $nickname: String
+    $name: String!
   ) {
     addNewAppUser(
-      authUserId: $authUserId
+      auth0UserId: $auth0UserId
       email: $email
-      nickname: $nickname
+      name: $name
     ) {
       id
-      auth_user_id
+      auth0_user_id
       email
-      nickname
+      name
     }
   }
 `

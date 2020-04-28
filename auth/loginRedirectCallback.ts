@@ -18,9 +18,9 @@ const LoginRedirectCallback = (nextRouter) => {
 
     addNewAppUser({
       variables: {
-        authUserId: authUser.sub,
+        auth0UserId: authUser.sub,
         email: authUser.email,
-        nickname: authUser.nickname
+        name: authUser.name
       }
     })
   }

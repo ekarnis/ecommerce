@@ -22,7 +22,7 @@ const typeDefs = gql`
         quantity: Int
       ): CustomItemInCart
     updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
-    addNewAppUser(authUserId: String!, email: String!, nickname: String): AppUser
+    addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser
   }
 
   type ItemOrder {
@@ -104,9 +104,9 @@ const typeDefs = gql`
 
   type AppUser {
     id: ID!
-    auth_user_id: String!
+    auth0_user_id: ID!
     email: String!
-    nickname: String
+    name: String!
   }
 `
 export default typeDefs

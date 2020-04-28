@@ -66,9 +66,9 @@ CREATE TABLE custom_order_items (
 
 CREATE TABLE app_users (
 	  id smallserial PRIMARY KEY,
-    auth_user_id VARCHAR(300) UNIQUE,
+    auth0_user_id VARCHAR(300) UNIQUE,
     email VARCHAR(200) NOT NULL,
-    nickname VARCHAR(200)
+    name VARCHAR(200) NOT NULL
 );
 
 
