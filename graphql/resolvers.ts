@@ -271,6 +271,27 @@ const resolvers = {
             quantity: quantity[0]
           }
         })
+    },
+
+    addNewAppUser: (_parent, { auth0UserId, email, name }, _context) => {
+      return db.select('*')
+        .from('app_users')
+        .where({ auth0_user_id: auth0UserId })
+        .first()
+        .then(app_user => {
+          // if app_user doesnt' exist then create one
+          if (app_user && app_user.auth0_user_id === auth0UserId) return app_user
+          return db('app_users')
+            .insert({
+              auth0_user_id: auth0UserId,
+              email: email,
+              name: name
+            })
+            .returning('*')
+            .then(newAppUser => {
+              return newAppUser[0]
+            })
+        })
     }
   }
 }

@@ -21,7 +21,8 @@ const typeDefs = gql`
         thicknessInCm: Int
         quantity: Int
       ): CustomItemInCart
-      updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
+    updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
+    addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser
   }
 
   type ItemOrder {
@@ -99,6 +100,13 @@ const typeDefs = gql`
     thickness_in_cm: Int!
     price_in_cad: Int!
     quantity: Int!
+  }
+
+  type AppUser {
+    id: ID!
+    auth0_user_id: ID!
+    email: String!
+    name: String!
   }
 `
 export default typeDefs

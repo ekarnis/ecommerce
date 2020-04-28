@@ -64,4 +64,12 @@ CREATE TABLE custom_order_items (
     quantity integer
 );
 
+CREATE TABLE app_users (
+	  id smallserial PRIMARY KEY,
+    auth0_user_id VARCHAR(300) UNIQUE,
+    email VARCHAR(200) NOT NULL,
+    name VARCHAR(200) NOT NULL
+);
+
+
 -- TODO: make this a knex migration
