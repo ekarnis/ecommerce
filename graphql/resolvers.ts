@@ -187,7 +187,6 @@ const resolvers = {
     addCustomItemToCart: (_parent, {
       userId, stainId, woodId, widthInCm, lengthInCm, thicknessInCm, quantity
     }, _context) => {
-      console.log('userId, stainId, woodId, widthInCm, lengthInCm, thicknessInCm, quantity', userId, stainId, woodId, widthInCm, lengthInCm, thicknessInCm, quantity)
       // get order id so you know which order to check
       return db.select('id')
         .from('orders')
@@ -262,10 +261,6 @@ const resolvers = {
         .update({ quantity: newQuantity })
         .returning('quantity')
         .then(quantity => {
-          console.log('', {
-            id: id,
-            quantity: quantity
-          })
           return {
             id: id,
             quantity: quantity[0]

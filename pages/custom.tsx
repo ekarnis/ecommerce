@@ -81,10 +81,10 @@ const Index = () => {
         }
       </h2>
       <h3 className="text-xl mb-16">
-        {wood.name !== undefined
+        {wood.name !== ''
           ? wood.name
           : null}
-        {stain.name !== undefined
+        {stain.name !== ''
           ? ', ' + stain.name
           : null}
         {widthInCm !== 0
