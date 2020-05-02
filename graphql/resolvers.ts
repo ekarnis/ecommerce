@@ -47,11 +47,16 @@ const resolvers = {
         .offset(args.skip)
     },
     order: (_parent, args, _context) => {
+      const whereClause = args.getPlacedOrders ? { user_id: args.appUserId }
+        : { user_id: args.appUserId, placed: null }
+      const whereNotClause = args.getPlacedOrders ? { placed: null } : {}
+
       return db
         .select('*')
         .from('orders')
-        .where({ id: args.id })
-        .first()
+        .where(whereClause)
+        .andWhereNot(whereNotClause)
+        .limit(50)
     },
     addresses: (_parent, args, _context) => {
       return db

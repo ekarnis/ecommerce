@@ -47,6 +47,11 @@ export default () => {
               Contact Us
             </a>
           </Link>
+          <Link href="/order-history">
+            <a className="block mt-4 lg:inline-block lg:mt-0 hover:text-indigo-200">
+              Order History
+            </a>
+          </Link>
         </div>
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <input

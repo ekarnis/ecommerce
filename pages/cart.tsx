@@ -5,11 +5,13 @@ import ORDER_QUERY from '../graphql/queries/order.query'
 import Layout from '../components/Layout'
 import CartBox from '../components/CartBox'
 import CheckoutBox from '../components/CheckoutBox'
+import { sumArrayProperties } from '../helpers/mathHelpers'
 
 const Cart = () => {
   const { data, loading, error, refetch } = useQuery(ORDER_QUERY, {
     variables: {
-      order_id: 1
+      appUserId: 1,
+      getPlacedOrders: false
     }
   })
 
@@ -54,17 +56,14 @@ const Cart = () => {
       )
     )
 
-    const customBoxes = data.order.custom_order_items.map(customOrderItem => (
-      <CartBox
-        key={customOrderItem.id}
-        refetch={refetch}
-        {...customOrderItem}
-      />
-    ))
-
-    const sumArrayProperties = (array: Array<any>, property: string) => {
-      return array ? array.reduce((accumulator, item) => accumulator + item[property], 0) : 0
-    }
+    const customBoxes = data.order.custom_order_items.map(
+      customOrderItem => (
+        <CartBox
+          key={customOrderItem.id}
+          refetch={refetch}
+          {...customOrderItem}
+        />
+      ))
 
     const totalItemNumber: number = sumArrayProperties(data.order.in_stock_order_items, 'quantity') +
     sumArrayProperties(data.order.custom_order_items, 'quantity')

@@ -10,7 +10,7 @@ const typeDefs = gql`
     boards(first: Int = 25, skip: Int = 0): [Board!]!
     board(id: ID!): Board!
     reviews(first: Int = 25, skip: Int = 0): [Review!]!
-    order(id: ID!): Order!
+    order(appUserId: ID!, getPlacedOrders: Boolean!): [Order]!
   }
 
   type Mutation {
@@ -106,6 +106,7 @@ const typeDefs = gql`
     placed: String
     tracking_code: String
     notes: String
+    final_cost: Int
     in_stock_order_items(first: Int = 25, skip: Int = 0): [In_Stock_Order_Item]
     custom_order_items(first: Int = 25, skip: Int = 0): [Custom_Order_Item]
   }
