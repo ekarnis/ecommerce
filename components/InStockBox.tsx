@@ -15,7 +15,7 @@ export default props => {
   const [toastMessage, setToastMessage] = useState('')
   const [toastType, setToastType] = useState('INFORMATIONAL')
 
-  const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+  const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms))
 
   const changeInStockItemsInCartOnClick = () => {
     changeInStockItemsInCart({ variables: { userId: 1, boardId: props.id, quantity: 1 } })

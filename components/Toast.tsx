@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 const Toast = props => {
-  const getToastColor = toastType => {
+  const getToastColor = (toastType: string) => {
     if (toastType === 'SUCCESS') return 'green'
     if (toastType === 'ERROR') return 'red'
     if (toastType === 'INFORMATIONAL') return 'blue'

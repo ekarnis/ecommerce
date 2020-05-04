@@ -26,7 +26,7 @@ const Index = () => {
   const [toastMessage, setToastMessage] = useState('')
   const [toastType, setToastType] = useState('INFORMATIONAL')
 
-  const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
   const conditionallyConvertStringToNumber = input =>
     typeof input === 'string'

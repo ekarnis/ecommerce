@@ -62,14 +62,14 @@ const Cart = () => {
       />
     ))
 
-    const sumArrayProperties = (array, property) => {
+    const sumArrayProperties = (array: Array<any>, property: string) => {
       return array ? array.reduce((accumulator, item) => accumulator + item[property], 0) : 0
     }
 
-    const totalItemNumber = sumArrayProperties(data.order.in_stock_order_items, 'quantity') +
+    const totalItemNumber: number = sumArrayProperties(data.order.in_stock_order_items, 'quantity') +
     sumArrayProperties(data.order.custom_order_items, 'quantity')
 
-    const subTotal = sumArrayProperties(data.order.custom_order_items, 'price_in_cad') +
+    const subTotal: number = sumArrayProperties(data.order.custom_order_items, 'price_in_cad') +
       data.order.in_stock_order_items ? data.order.in_stock_order_items.reduce(
         (accumulator, inStockOrderItem) =>
           accumulator + inStockOrderItem.quantity * inStockOrderItem.board.price_in_cad

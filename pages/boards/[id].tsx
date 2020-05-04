@@ -27,7 +27,7 @@ export default function Board () {
   })
   const [changeInStockItemsInCart] = useMutation(CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION)
 
-  const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
   if (loading) {
     return <p>Loading...</p>
