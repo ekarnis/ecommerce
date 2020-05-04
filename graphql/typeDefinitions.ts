@@ -2,6 +2,8 @@ import { gql } from 'apollo-server-micro'
 
 const typeDefs = gql`
   type Query {
+    addresses(first: Int = 25, skip: Int = 0): [Address!]!
+    address(id: ID!): Address!
     woods(first: Int = 25, skip: Int = 0): [Wood!]!
     stains(first: Int = 25, skip: Int = 0): [Stain!]!
     boards(first: Int = 25, skip: Int = 0): [Board!]!
@@ -22,7 +24,29 @@ const typeDefs = gql`
         quantity: Int
       ): CustomItemInCart
     updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
-    addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser
+    addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser,
+    createAddress(
+      userId: Int
+      full_name: String!
+      line_1: String!
+      line_2: String
+      city: String!
+      region: String!
+      postal_code: String!
+      phone_number: String!
+      instructions: String
+    ): Address,
+    updateAddress(
+      id: ID!,
+      full_name: String
+      line_1: String
+      line_2: String
+      city: String
+      region: String
+      postal_code: String
+      phone_number: String
+      instructions: String
+    ): Address
   }
 
   type ItemOrder {
@@ -108,5 +132,19 @@ const typeDefs = gql`
     email: String!
     name: String!
   }
+
+  type Address {
+    id: ID!
+    app_user: AppUser!
+    full_name: String!
+    line_1: String!
+    line_2: String
+    city: String!
+    region: String!
+    postal_code: String!
+    phone_number: String!
+    instructions: String
+    }
+
 `
 export default typeDefs
