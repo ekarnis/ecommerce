@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     addresses(first: Int = 25, skip: Int = 0): [Address!]!
     address(id: ID!): Address!
+    appUser(id: ID!): AppUser!
     woods(first: Int = 25, skip: Int = 0): [Wood!]!
     stains(first: Int = 25, skip: Int = 0): [Stain!]!
     boards(first: Int = 25, skip: Int = 0): [Board!]!
@@ -26,7 +27,7 @@ const typeDefs = gql`
     updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
     addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser,
     createAddress(
-      userId: Int
+      app_user_id: Int!
       full_name: String!
       line_1: String!
       line_2: String
@@ -131,11 +132,11 @@ const typeDefs = gql`
     auth0_user_id: ID!
     email: String!
     name: String!
+    addresses: [Address]
   }
 
   type Address {
     id: ID!
-    app_user: AppUser!
     full_name: String!
     line_1: String!
     line_2: String

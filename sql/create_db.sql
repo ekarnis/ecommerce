@@ -71,7 +71,7 @@ CREATE TABLE app_users (
 
 CREATE TABLE addresses (
     id smallserial PRIMARY KEY,
-    app_users_id integer REFERENCES app_users (id),
+    app_user_id integer REFERENCES app_users (id),
     full_name varchar(200) NOT NULL,
     line_1 varchar(200) NOT NULL,
     line_2 varchar(200),

@@ -118,7 +118,7 @@ VALUES(
 );
 
 INSERT INTO addresses (
-    app_users_id,
+    app_user_id,
     full_name ,
     line_1 ,
     line_2,

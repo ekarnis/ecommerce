@@ -67,6 +67,22 @@ const resolvers = {
         .from('addresses')
         .where({ id: args.id })
         .first()
+    },
+    appUser: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('app_users')
+        .where({ id: args.id })
+        .first()
+    }
+  },
+
+  AppUser: {
+    addresses: (appUser, args, _context) => {
+      return db
+        .select('*')
+        .from('addresses')
+        .where({ app_user_id: appUser.id })
     }
   },
 
@@ -303,6 +319,7 @@ const resolvers = {
         })
     },
     createAddress: (_parent, {
+      app_user_id,
       full_name,
       line_1,
       line_2,
@@ -314,6 +331,7 @@ const resolvers = {
     }, _context) => {
       return db('addresses')
         .insert({
+          app_user_id,
           full_name,
           line_1,
           line_2,
