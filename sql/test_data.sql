@@ -105,3 +105,37 @@ VALUES (
     1,
     1
 );
+
+INSERT INTO app_users (
+    auth0_user_id ,
+    email,
+    name
+) 
+VALUES(
+    1,
+    'test@test.ca',
+    'Eric Karnis'
+);
+
+INSERT INTO addresses (
+    app_user_id,
+    full_name ,
+    line_1 ,
+    line_2,
+    city ,
+    region ,
+    postal_code ,
+    phone_number ,
+    instructions
+)
+VALUES (
+    1,
+    'Eric Karnis',
+    '100 Test Ave',
+    'apt 706',
+	'Toronto',
+    'Ontario',
+    'M8P5F6',
+    '123-456-7890',
+    'Please make sure it is nice and not bad.'
+)

@@ -2,6 +2,9 @@ import { gql } from 'apollo-server-micro'
 
 const typeDefs = gql`
   type Query {
+    addresses(first: Int = 25, skip: Int = 0): [Address!]!
+    address(id: ID!): Address!
+    appUser(id: ID!): AppUser!
     woods(first: Int = 25, skip: Int = 0): [Wood!]!
     stains(first: Int = 25, skip: Int = 0): [Stain!]!
     boards(first: Int = 25, skip: Int = 0): [Board!]!
@@ -13,16 +16,38 @@ const typeDefs = gql`
   type Mutation {
     changeInStockItemsInCart(userId: ID!, boardId: ID!, quantity: Int!): ItemOrder
     addCustomItemToCart(
-        userId: ID!
-        stainId: ID
-        woodId: ID
-        widthInCm: Int
-        lengthInCm: Int
-        thicknessInCm: Int
+        userId: ID!,
+        stainId: ID,
+        woodId: ID,
+        widthInCm: Int,
+        lengthInCm: Int,
+        thicknessInCm: Int,
         quantity: Int
       ): CustomItemInCart
     updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
-    addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser
+    addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser,
+    createAddress(
+      app_user_id: Int!,
+      full_name: String!,
+      line_1: String!,
+      line_2: String,
+      city: String!,
+      region: String!,
+      postal_code: String!,
+      phone_number: String!,
+      instructions: String
+    ): Address,
+    updateAddress(
+      id: ID!,
+      full_name: String,
+      line_1: String,
+      line_2: String,
+      city: String,
+      region: String,
+      postal_code: String,
+      phone_number: String,
+      instructions: String
+    ): Address
   }
 
   type ItemOrder {
@@ -107,6 +132,20 @@ const typeDefs = gql`
     auth0_user_id: ID!
     email: String!
     name: String!
+    addresses: [Address]
   }
+
+  type Address {
+    id: ID!
+    full_name: String!
+    line_1: String!
+    line_2: String
+    city: String!
+    region: String!
+    postal_code: String!
+    phone_number: String!
+    instructions: String
+    }
+
 `
 export default typeDefs

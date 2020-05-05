@@ -52,6 +52,37 @@ const resolvers = {
         .from('orders')
         .where({ id: args.id })
         .first()
+    },
+    addresses: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('addresses')
+        .orderBy('id', 'asc')
+        .limit(Math.min(args.first, 50))
+        .offset(args.skip)
+    },
+    address: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('addresses')
+        .where({ id: args.id })
+        .first()
+    },
+    appUser: (_parent, args, _context) => {
+      return db
+        .select('*')
+        .from('app_users')
+        .where({ id: args.id })
+        .first()
+    }
+  },
+
+  AppUser: {
+    addresses: (appUser, args, _context) => {
+      return db
+        .select('*')
+        .from('addresses')
+        .where({ app_user_id: appUser.id })
     }
   },
 
@@ -267,14 +298,13 @@ const resolvers = {
           }
         })
     },
-
     addNewAppUser: (_parent, { auth0UserId, email, name }, _context) => {
       return db.select('*')
         .from('app_users')
         .where({ auth0_user_id: auth0UserId })
         .first()
         .then(app_user => {
-          // if app_user doesnt' exist then create one
+          // if app_user doesn't exist then create one
           if (app_user && app_user.auth0_user_id === auth0UserId) return app_user
           return db('app_users')
             .insert({
@@ -286,6 +316,66 @@ const resolvers = {
             .then(newAppUser => {
               return newAppUser[0]
             })
+        })
+    },
+    createAddress: (_parent, {
+      app_user_id,
+      full_name,
+      line_1,
+      line_2,
+      city,
+      region,
+      postal_code,
+      phone_number,
+      instructions
+    }, _context) => {
+      return db('addresses')
+        .insert({
+          app_user_id,
+          full_name,
+          line_1,
+          line_2,
+          city,
+          region,
+          postal_code,
+          phone_number,
+          instructions
+        })
+        .returning('*')
+        .then(newAddress => {
+          return newAddress[0]
+        })
+    },
+    updateAddress: (_parent, {
+      id,
+      full_name,
+      line_1,
+      line_2,
+      city,
+      region,
+      postal_code,
+      phone_number,
+      instructions
+    }, _context) => {
+      return db('addresses')
+        .where({
+          id: parseInt(id)
+        })
+        .update({
+          full_name: full_name,
+          line_1: line_1,
+          line_2: line_2,
+          city: city,
+          region: region,
+          postal_code: postal_code,
+          phone_number: phone_number,
+          instructions: instructions
+        })
+        .returning('*')
+        .then(updatedAddress => {
+          return {
+            id: updatedAddress[0]
+          }
         })
     }
   }
