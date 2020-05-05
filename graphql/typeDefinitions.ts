@@ -16,36 +16,36 @@ const typeDefs = gql`
   type Mutation {
     changeInStockItemsInCart(userId: ID!, boardId: ID!, quantity: Int!): ItemOrder
     addCustomItemToCart(
-        userId: ID!
-        stainId: ID
-        woodId: ID
-        widthInCm: Int
-        lengthInCm: Int
-        thicknessInCm: Int
+        userId: ID!,
+        stainId: ID,
+        woodId: ID,
+        widthInCm: Int,
+        lengthInCm: Int,
+        thicknessInCm: Int,
         quantity: Int
       ): CustomItemInCart
     updateCustomItemInCart(id: ID!, newQuantity: Int!): CustomItemInCart
     addNewAppUser(auth0UserId: ID!, email: String!, name: String!): AppUser,
     createAddress(
-      app_user_id: Int!
-      full_name: String!
-      line_1: String!
-      line_2: String
-      city: String!
-      region: String!
-      postal_code: String!
-      phone_number: String!
+      app_user_id: Int!,
+      full_name: String!,
+      line_1: String!,
+      line_2: String,
+      city: String!,
+      region: String!,
+      postal_code: String!,
+      phone_number: String!,
       instructions: String
     ): Address,
     updateAddress(
       id: ID!,
-      full_name: String
-      line_1: String
-      line_2: String
-      city: String
-      region: String
-      postal_code: String
-      phone_number: String
+      full_name: String,
+      line_1: String,
+      line_2: String,
+      city: String,
+      region: String,
+      postal_code: String,
+      phone_number: String,
       instructions: String
     ): Address
   }

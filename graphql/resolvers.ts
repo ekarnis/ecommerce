@@ -374,15 +374,7 @@ const resolvers = {
         .returning('*')
         .then(updatedAddress => {
           return {
-            id: updatedAddress[0].id,
-            full_name: updatedAddress[0].full_name,
-            line_1: updatedAddress[0].line_1,
-            line_2: updatedAddress[0].line_2,
-            city: updatedAddress[0].city,
-            region: updatedAddress[0].region,
-            postal_code: updatedAddress[0].postal_code,
-            phone_number: updatedAddress[0].phone_number,
-            instructions: updatedAddress[0].instructions
+            id: updatedAddress[0]
           }
         })
     }
