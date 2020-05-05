@@ -4,13 +4,11 @@ import { useMutation } from '@apollo/react-hooks'
 import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../graphql/mutations/changeInStockItemsInCart'
 import UPDATE_CUSTOM_ITEM_IN_CART_MUTATION from '../graphql/mutations/updateCustomItemInCart'
 
-
 import PrimaryButton from '../components/PrimaryButton'
 
 export default props => {
   const [changeInStockItemsInCart] = useMutation(CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION)
   const [updateCustomItemsInCart] = useMutation(UPDATE_CUSTOM_ITEM_IN_CART_MUTATION)
-
 
   const changeInStockItemsInCartOnClick = (newQuantity, boardId) => {
     changeInStockItemsInCart({
@@ -33,15 +31,14 @@ export default props => {
 
   // translation so it'll work with custom and in stock boards
 
-  const wood = props.wood ? props.wood : props.board.wood
-  const stain = props.stain ? props.stain : props.board.stain
-  const width = props.width_in_cm ? props.width_in_cm : props.board.width_in_cm
-  const length = props.length_in_cm ? props.length_in_cm : props.board.length_in_cm
-  const thickness = props.thickness_in_cm ? props.thickness_in_cm : props.board.thickness_in_cm
-  const price = props.price_in_cad ? props.price_in_cad : props.board.price_in_cad
+  const wood: string = props.wood ? props.wood : props.board.wood
+  const stain: string = props.stain ? props.stain : props.board.stain
+  const width: string = props.width_in_cm ? props.width_in_cm : props.board.width_in_cm
+  const length: string = props.length_in_cm ? props.length_in_cm : props.board.length_in_cm
+  const thickness: string = props.thickness_in_cm ? props.thickness_in_cm : props.board.thickness_in_cm
+  const price: string = props.price_in_cad ? props.price_in_cad : props.board.price_in_cad
 
-  const pictureURL = props.board ? props.board.picture_url : '/board.jpg'
-
+  const pictureURL: string = props.board ? props.board.picture_url : '/board.jpg'
 
   return (
     <div

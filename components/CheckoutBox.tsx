@@ -1,8 +1,8 @@
 import PrimaryButton from './PrimaryButton'
 
 export default props => {
-  const tax = props.taxRate * props.subTotal
-  const total = props.subTotal + tax + props.shipping
+  const tax: number = props.taxRate * props.subTotal
+  const total: number = props.subTotal + tax + props.shipping
 
   return (
     <div>
