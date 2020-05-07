@@ -10,7 +10,7 @@ const typeDefs = gql`
     boards(first: Int = 25, skip: Int = 0): [Board!]!
     board(id: ID!): Board!
     reviews(first: Int = 25, skip: Int = 0): [Review!]!
-    order(appUserId: ID!, getPlacedOrders: Boolean!): [Order]!
+    orders(appUserId: ID!, getPlacedOrders: Boolean!): [Order]!
   }
 
   type Mutation {

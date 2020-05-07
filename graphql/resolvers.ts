@@ -46,7 +46,7 @@ const resolvers = {
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
     },
-    order: (_parent, args, _context) => {
+    orders: (_parent, args, _context) => {
       const whereClause = args.getPlacedOrders ? { user_id: args.appUserId }
         : { user_id: args.appUserId, placed: null }
       const whereNotClause = args.getPlacedOrders ? { placed: null } : {}

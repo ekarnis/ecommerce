@@ -1,11 +1,12 @@
 import PrimaryButton from './PrimaryButton'
+import Link from 'next/link'
 
 import { sumArrayProperties } from '../helpers/mathHelpers'
 
 // TODO rename to CompletedOrderBox
 export default props => {
-  const totalItemNumber = sumArrayProperties(props.inStockOrderItems, 'quantity') +
-  sumArrayProperties(props.customOrderItems, 'quantity')
+  const totalItemNumber = sumArrayProperties(props.in_stock_order_items, 'quantity') +
+  sumArrayProperties(props.custom_order_items, 'quantity')
 
   return (
 
@@ -23,13 +24,23 @@ export default props => {
           <span className="text-lg font-bold text-indigo-500 mr-2">
             Total
           </span>
-          <span>${props.finalCost}</span>
+          <span>${props.final_cost}</span>
+        </div>
+        <div className='inline-flex items-center w-full'>
+          <span className="text-lg font-bold text-indigo-500 mr-2">
+            Date Ordered
+          </span>
+          <span>{ new Intl.DateTimeFormat('en-CA', {
+            year: 'numeric',
+            month: 'long',
+            day: '2-digit'
+          }).format(props.placed)}</span>
         </div>
       </div>
 
       <div className="inset-y-0 right-0">
         <PrimaryButton
-          onClick={() => {}}
+          onClick={() => { props.showFullView(props) }}
           buttonText={'View Order Details'}
         />
       </div>

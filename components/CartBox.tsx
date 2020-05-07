@@ -1,4 +1,3 @@
-
 import { useMutation } from '@apollo/react-hooks'
 
 import CHANGE_IN_STOCK_ITEMS_IN_CART_MUTATION from '../graphql/mutations/changeInStockItemsInCart'
@@ -30,13 +29,12 @@ export default props => {
   }
 
   // translation so it'll work with custom and in stock boards
-
-  const wood: string = props.wood ? props.wood : props.board.wood
-  const stain: string = props.stain ? props.stain : props.board.stain
-  const width: string = props.width_in_cm ? props.width_in_cm : props.board.width_in_cm
-  const length: string = props.length_in_cm ? props.length_in_cm : props.board.length_in_cm
-  const thickness: string = props.thickness_in_cm ? props.thickness_in_cm : props.board.thickness_in_cm
-  const price: string = props.price_in_cad ? props.price_in_cad : props.board.price_in_cad
+  const wood: string = props.board ? props.board.wood.name : props.wood.name
+  const stain: string = props.board ? props.board.stain.name : props.stain.name 
+  const width: string = props.board ? props.board.width_in_cm : props.width_in_cm
+  const length: string = props.board ? props.board.length_in_cm : props.length_in_cm
+  const thickness: string = props.board ? props.board.thickness_in_cm : props.thickness_in_cm
+  const price: string = props.board ? props.board.price_in_cad : props.price_in_cad
 
   const pictureURL: string = props.board ? props.board.picture_url : '/board.jpg'
 
@@ -47,9 +45,9 @@ export default props => {
       <img className="m-1 w-32" src={pictureURL}></img>
       <span className="flex items-center">
         <span className="text-3xl font-bold text-indigo-500 mr-4">
-          {props.board ? null : 'Custom: '} {wood.name}
+          {props.board ? null : 'Custom: '} {wood}
         </span>
-        {stain.name}, &nbsp;
+        {stain}, &nbsp;
         {width}cm x {length}cm x {thickness}cm
       </span>
       <span>

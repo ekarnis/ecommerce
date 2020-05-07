@@ -1,17 +1,30 @@
 import { useQuery } from '@apollo/react-hooks'
-
-import ORDER_QUERY from '../graphql/queries/order.query'
+import { useState } from 'react'
+import ORDERS_QUERY from '../graphql/queries/order.query'
 
 import Layout from '../components/Layout'
 import CompletedOrderBox from '../components/CompletedOrderBox'
+import OrderDetailView from '../components/OrderDetailView'
 
 const OrderHistory = () => {
-  const { data, loading, error, refetch } = useQuery(ORDER_QUERY, {
+  const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
     variables: {
       appUserId: 1,
       getPlacedOrders: true
     }
   })
+  const [isOrderFullViewVisible, setIsOrderFullViewVisible] = useState(false)
+  const [fullOrderProps, setFullOrderProps] = useState({ isOrderFullViewVisible })
+
+  const showOrderFullView = propsToSet => {
+    setFullOrderProps(propsToSet)
+    setIsOrderFullViewVisible(true)
+  }
+
+  const closeOrderFullView = () => {
+    setFullOrderProps({ isOrderFullViewVisible })
+    setIsOrderFullViewVisible(false)
+  }
 
   if (loading) {
     return (
@@ -38,24 +51,29 @@ const OrderHistory = () => {
   }
 
   if (data) {
-    const completedOrderBoxes = !data.order ? null
-      : data.order.map(
+    const completedOrderBoxes = !data.orders ? null
+      : data.orders.map(
         completedOrder => (
           <CompletedOrderBox
             key={completedOrder.id}
-            orderDate={completedOrder.placed}
-            finalCost={completedOrder.final_cost}
-            trackingCode={completedOrder.tracking_code}
-            customOrderItems={completedOrder.custom_order_items}
-            inStockOrderItems={completedOrder.in_stock_order_items}
+            {...completedOrder}
+            showFullView={showOrderFullView}
           />
         ))
 
     return (
       <Layout>
-        <h1 className='text-6xl mb-16'>Your Order History</h1>
-        <div className='w-full flex-column items-center'>
-          {completedOrderBoxes}
+        <div className='relative w-full'>
+          <h1 className='text-6xl mb-16'>Your Order History</h1>
+          <div className='w-100 flex-column items-center'>
+            {completedOrderBoxes}
+          </div>
+          <div className={`absolute w-full left-0 top-0 z-10 ${isOrderFullViewVisible ? 'visible' : 'hidden'}`}>
+            <OrderDetailView
+              {...fullOrderProps}
+              closeFullView={closeOrderFullView}
+            />
+          </div>
         </div>
       </Layout>
     )
