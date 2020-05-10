@@ -72,11 +72,18 @@ export default () => {
               Log out
             </div>)}
 
-          <Link href="/cart">
-            <a className="inline-block text-md leading-none border rounded border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 p-4 mr-2 mt-4 lg:mt-0">
+          <div className="inline-flex mr-2">
+            <Link href="/cart">
+              <a className="inline-block text-md leading-none border rounded-l border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 p-4 mt-4 lg:mt-0">
               Cart
-            </a>
-          </Link>
+              </a>
+            </Link>
+            <Link href="/order-history">
+              <a className="inline-block text-md leading-none border rounded-r border-white bg-white text-indigo-900 hover:text-white hover:bg-indigo-900 p-4 mt-4 lg:mt-0">
+                <img className="fill-current w-5 h-5" src="./history.svg" />
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

@@ -1,15 +1,17 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import ORDER_QUERY from '../graphql/queries/order.query'
+import ORDERS_QUERY from '../graphql/queries/order.query'
 
 import Layout from '../components/Layout'
 import CartBox from '../components/CartBox'
 import CheckoutBox from '../components/CheckoutBox'
+import { sumArrayProperties } from '../utils/mathUtils'
 
 const Cart = () => {
-  const { data, loading, error, refetch } = useQuery(ORDER_QUERY, {
+  const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
     variables: {
-      order_id: 1
+      appUserId: 1,
+      getPlacedOrders: false
     }
   })
 
@@ -44,7 +46,9 @@ const Cart = () => {
   }
 
   if (data) {
-    const inStockBoxes = data.order.in_stock_order_items.map(
+    // TODO make a mutation if user requires a new cart order, if data.Order = undefined or null
+
+    const inStockBoxes = data.orders[0].in_stock_order_items.map(
       inStockOrderItem => (
         <CartBox
           key={inStockOrderItem.id}
@@ -54,23 +58,20 @@ const Cart = () => {
       )
     )
 
-    const customBoxes = data.order.custom_order_items.map(customOrderItem => (
-      <CartBox
-        key={customOrderItem.id}
-        refetch={refetch}
-        {...customOrderItem}
-      />
-    ))
+    const customBoxes = data.orders[0].custom_order_items.map(
+      customOrderItem => (
+        <CartBox
+          key={customOrderItem.id}
+          refetch={refetch}
+          {...customOrderItem}
+        />
+      ))
 
-    const sumArrayProperties = (array: Array<any>, property: string) => {
-      return array ? array.reduce((accumulator, item) => accumulator + item[property], 0) : 0
-    }
+    const totalItemNumber: number = sumArrayProperties(data.orders[0].in_stock_order_items, 'quantity') +
+    sumArrayProperties(data.orders[0].custom_order_items, 'quantity')
 
-    const totalItemNumber: number = sumArrayProperties(data.order.in_stock_order_items, 'quantity') +
-    sumArrayProperties(data.order.custom_order_items, 'quantity')
-
-    const subTotal: number = sumArrayProperties(data.order.custom_order_items, 'price_in_cad') +
-      data.order.in_stock_order_items ? data.order.in_stock_order_items.reduce(
+    const subTotal: number = sumArrayProperties(data.orders[0].custom_order_items, 'price_in_cad') +
+      data.orders[0].in_stock_order_items ? data.orders[0].in_stock_order_items.reduce(
         (accumulator, inStockOrderItem) =>
           accumulator + inStockOrderItem.quantity * inStockOrderItem.board.price_in_cad
         , 0

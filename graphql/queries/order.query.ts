@@ -1,13 +1,14 @@
 import gql from 'graphql-tag'
 
-const ORDER_QUERY = gql`
-  query Order($order_id: ID!) {
-    order(id: $order_id) {
+const ORDERS_QUERY = gql`
+  query Orders($appUserId: ID!, $getPlacedOrders: Boolean!) {
+    orders(appUserId: $appUserId, getPlacedOrders: $getPlacedOrders) {
       id
       user_id
       address_id
       placed
       tracking_code
+      final_cost
       notes
       in_stock_order_items {
         id
@@ -46,4 +47,4 @@ const ORDER_QUERY = gql`
   }
 `
 
-export default ORDER_QUERY
+export default ORDERS_QUERY
