@@ -1,6 +1,6 @@
 import OrderDetailBox from './OrderDetailBox'
 
-const OrderDetailModal = props => {
+const OrderDetailsModal = props => {
   if (props.isOrderFullViewVisible !== undefined) return (<div>filler lol</div>)
 
   const inStockBoxes = props.in_stock_order_items.map(
@@ -21,7 +21,7 @@ const OrderDetailModal = props => {
     ))
 
   return (
-    <div className='flex-row bg-white rounded shadow-2xl'>
+    <div className='flex-row bg-white rounded shadow-2xl mb-5'>
       <div id='header' className='inline-flex'>
         <div className='self-start w-4 h-4 ml-3 mt-3 mb-2' onClick={() => props.closeFullView()}>
           <img className="fill-current" src="./close.svg" />
@@ -60,4 +60,4 @@ const OrderDetailModal = props => {
   )
 }
 
-export default OrderDetailModal
+export default OrderDetailsModal

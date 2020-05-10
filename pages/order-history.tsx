@@ -4,7 +4,7 @@ import ORDERS_QUERY from '../graphql/queries/order.query'
 
 import Layout from '../components/Layout'
 import CompletedOrderBox from '../components/CompletedOrderBox'
-import OrderDetailModal from '../components/OrderDetailModal'
+import OrderDetailsModal from '../components/OrderDetailModal'
 
 const OrderHistory = () => {
   const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
@@ -69,7 +69,7 @@ const OrderHistory = () => {
             {completedOrderBoxes}
           </div>
           <div className={`absolute w-full left-0 top-0 ml-1 z-10 ${isOrderFullViewVisible ? 'visible' : 'hidden'}`}>
-            <OrderDetailModal
+            <OrderDetailsModal
               {...fullOrderProps}
               closeFullView={closeOrderFullModal}
             />
