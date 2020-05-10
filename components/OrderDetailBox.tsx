@@ -11,11 +11,11 @@ export default props => {
 
   return (
     <div
-      className='w-full flex justify-between items-center py-1 px-4 m-2 border border-gray-200 bg-white rounded-lg shadow-md'
+      className='w-full flex justify-between items-center m-2'
     >
       <img className='m-1 w-32' src={pictureURL}></img>
       <span className='items-center'>
-        <span className='text-3xl font-bold text-indigo-500 mr-4'>
+        <span className='text-xl font-bold text-indigo-500 mr-4'>
           {props.board ? null : 'Custom: '} {wood}
         </span>
         <div className='flex-col'>
@@ -25,7 +25,7 @@ export default props => {
       </span>
       <span className='flex-col'>
         <span className='flex'>Quantity: {props.quantity}</span>
-        <span className='flex border border-gray-100'>${price} CAD</span>
+        <span className='flex'>${price} CAD</span>
       </span>
     </div>
   )

@@ -4,7 +4,7 @@ import ORDERS_QUERY from '../graphql/queries/order.query'
 
 import Layout from '../components/Layout'
 import CompletedOrderBox from '../components/CompletedOrderBox'
-import OrderDetailView from '../components/OrderDetailView'
+import OrderDetailModal from '../components/OrderDetailModal'
 
 const OrderHistory = () => {
   const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
@@ -16,12 +16,12 @@ const OrderHistory = () => {
   const [isOrderFullViewVisible, setIsOrderFullViewVisible] = useState(false)
   const [fullOrderProps, setFullOrderProps] = useState({ isOrderFullViewVisible })
 
-  const showOrderFullView = propsToSet => {
+  const showOrderFullModal = propsToSet => {
     setFullOrderProps(propsToSet)
     setIsOrderFullViewVisible(true)
   }
 
-  const closeOrderFullView = () => {
+  const closeOrderFullModal = () => {
     setFullOrderProps({ isOrderFullViewVisible })
     setIsOrderFullViewVisible(false)
   }
@@ -57,21 +57,21 @@ const OrderHistory = () => {
           <CompletedOrderBox
             key={completedOrder.id}
             {...completedOrder}
-            showFullView={showOrderFullView}
+            showFullView={showOrderFullModal}
           />
         ))
 
     return (
       <Layout>
         <div className='relative w-full'>
-          <h1 className='text-6xl mb-16'>Your Order History</h1>
-          <div className='w-100 flex-column items-center'>
+          <h1 className='text-6xl mb-16 ml-2'>Your Order History</h1>
+          <div className='w-11/12 flex-column items-center'>
             {completedOrderBoxes}
           </div>
-          <div className={`absolute w-full left-0 top-0 z-10 ${isOrderFullViewVisible ? 'visible' : 'hidden'}`}>
-            <OrderDetailView
+          <div className={`absolute w-full left-0 top-0 ml-1 z-10 ${isOrderFullViewVisible ? 'visible' : 'hidden'}`}>
+            <OrderDetailModal
               {...fullOrderProps}
-              closeFullView={closeOrderFullView}
+              closeFullView={closeOrderFullModal}
             />
           </div>
         </div>

@@ -1,7 +1,6 @@
 import PrimaryButton from './PrimaryButton'
-import Link from 'next/link'
 
-import { sumArrayProperties } from '../helpers/mathHelpers'
+import { sumArrayProperties } from '../utils/mathUtils'
 
 // TODO rename to CompletedOrderBox
 export default props => {
@@ -13,7 +12,7 @@ export default props => {
     <div
       className="w-full flex justify-between items-center py-1 px-4 m-2 border border-gray-200 bg-white rounded-lg shadow-md"
     >
-      <div className="flex-column">
+      <div className="flex-column mt-2 mb-2">
         <div className='inline-flex items-center w-full'>
           <span className="text-lg font-bold text-indigo-500 mr-2">
             Number of Boards

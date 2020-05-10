@@ -5,7 +5,7 @@ import ORDERS_QUERY from '../graphql/queries/order.query'
 import Layout from '../components/Layout'
 import CartBox from '../components/CartBox'
 import CheckoutBox from '../components/CheckoutBox'
-import { sumArrayProperties } from '../helpers/mathHelpers'
+import { sumArrayProperties } from '../utils/mathUtils'
 
 const Cart = () => {
   const { data, loading, error, refetch } = useQuery(ORDERS_QUERY, {
