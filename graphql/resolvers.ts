@@ -1,4 +1,5 @@
 import knex from 'knex'
+import { convertSnakeToCamelCase } from '../utils/jsonUtils'
 
 const db = knex({
   client: 'pg',
@@ -30,6 +31,7 @@ const resolvers = {
         .orderBy('price_in_cad', 'asc')
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
+        .then(boards => convertSnakeToCamelCase(boards))
     },
     board: (_parent, args, _context) => {
       return db
@@ -57,6 +59,7 @@ const resolvers = {
         .where(whereClause)
         .andWhereNot(whereNotClause)
         .limit(50)
+        .then(orders => convertSnakeToCamelCase(orders))
     },
     addresses: (_parent, args, _context) => {
       return db
@@ -96,14 +99,14 @@ const resolvers = {
       return db
         .select('*')
         .from('stains')
-        .where({ id: board.stain_id })
+        .where({ id: board.stainId })
         .first()
     },
     wood: (board, args, _context) => {
       return db
         .select('*')
         .from('woods')
-        .where({ id: board.wood_id })
+        .where({ id: board.woodId })
         .first()
     },
     reviews: (board, args, _context) => {
@@ -116,7 +119,7 @@ const resolvers = {
   },
 
   Order: {
-    in_stock_order_items: (order, args, _context) => {
+    inStockOrderItems: (order, args, _context) => {
       return db
         .select('*')
         .from('in_stock_order_items')
@@ -124,8 +127,9 @@ const resolvers = {
         .orderBy('id', 'asc')
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
+        .then(inStockOrderItems => convertSnakeToCamelCase(inStockOrderItems))
     },
-    custom_order_items: (order, args, _context) => {
+    customOrderItems: (order, args, _context) => {
       return db
         .select('*')
         .from('custom_order_items')
@@ -133,32 +137,34 @@ const resolvers = {
         .orderBy('id', 'asc')
         .limit(Math.min(args.first, 50))
         .offset(args.skip)
+        .then(customOrderItems => convertSnakeToCamelCase(customOrderItems))
     }
   },
 
-  In_Stock_Order_Item: {
+  InStockOrderItem: {
     board: (inStockOrderItem, args, _context) => {
       return db
         .select('*')
         .from('boards')
-        .where({ id: inStockOrderItem.board_id })
+        .where({ id: inStockOrderItem.boardId })
         .first()
+        .then(board => convertSnakeToCamelCase(board))
     }
   },
 
-  Custom_Order_Item: {
+  CustomOrderItem: {
     stain: (customOrderItem, args, _context) => {
       return db
         .select('*')
         .from('stains')
-        .where({ id: customOrderItem.stain_id })
+        .where({ id: customOrderItem.stainId })
         .first()
     },
     wood: (customOrderItem, args, _context) => {
       return db
         .select('*')
         .from('woods')
-        .where({ id: customOrderItem.wood_id })
+        .where({ id: customOrderItem.woodId })
         .first()
     }
   },

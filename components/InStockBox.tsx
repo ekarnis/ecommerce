@@ -51,10 +51,10 @@ export default props => {
         <div className="flex flex-col items-center mb-4">
           <h3 className="text-3xl font-bold text-indigo-500">{props.wood.name}</h3>
           <div>
-            {props.width_in_cm}cm x {props.length_in_cm}cm x {props.thickness_in_cm}cm
+            {props.widthInCm}cm x {props.lengthInCm}cm x {props.thicknessInCm}cm
           </div>
           <div className="mb-4">{props.stain.name}</div>
-          <img src={props.picture_url}></img>
+          <img src={props.pictureUrl}></img>
         </div>
       </Link>
       <PrimaryButton

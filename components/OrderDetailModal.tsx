@@ -3,7 +3,7 @@ import OrderDetailBox from './OrderDetailBox'
 const OrderDetailsModal = props => {
   if (props.isOrderFullViewVisible !== undefined) return (<div>filler lol</div>)
 
-  const inStockBoxes = props.in_stock_order_items.map(
+  const inStockBoxes = props.inStockOrderItems.map(
     inStockOrderItem => (
       <OrderDetailBox
         key={inStockOrderItem.id}
@@ -12,7 +12,7 @@ const OrderDetailsModal = props => {
     )
   )
 
-  const customBoxes = props.custom_order_items.map(
+  const customBoxes = props.customOrderItems.map(
     customOrderItem => (
       <OrderDetailBox
         key={customOrderItem.id}
@@ -23,7 +23,7 @@ const OrderDetailsModal = props => {
   return (
     <div className='flex-row bg-white rounded shadow-2xl mb-5'>
       <div id='header' className='inline-flex'>
-        <div className='self-start w-4 h-4 ml-3 mt-3 mb-2' onClick={() => props.closeFullView()}>
+        <div className='self-start w-4 h-4 ml-3 mt-3 mb-2 hover:opacity-50' onClick={() => props.closeFullView()}>
           <img className="fill-current" src="./close.svg" />
         </div>
         <div className='flex w-full ml-5'><h1 className='text-2xl'>Your Order</h1></div>
@@ -38,17 +38,17 @@ const OrderDetailsModal = props => {
             <span className="text-lg font-bold text-indigo-500 mr-2">
             Total
             </span>
-            <span>${props.final_cost}</span>
+            <span>${props.finalCost}</span>
           </div>
           <div className='inline-flex items-center w-full'>
             <span className="text-lg font-bold text-indigo-500 mr-2">
             Date Ordered
             </span>
-            <span>{ new Intl.DateTimeFormat('en-CA', {
+            <span>{ props.placed ? new Intl.DateTimeFormat('en-CA', {
               year: 'numeric',
               month: 'long',
               day: '2-digit'
-            }).format(props.placed)}</span>
+            }).format(new Date(props.placed)) : 'this is a bug' }</span>
           </div>
         </div>
         <div className='flex-col w-3/5 mr-8 ml-1 mt-4 items-end'>
