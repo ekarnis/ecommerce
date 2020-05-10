@@ -2,12 +2,12 @@ export default props => {
   // translation so it'll work with custom and in stock boards
   const wood: string = props.board ? props.board.wood.name : props.wood.name
   const stain: string = props.board ? props.board.stain.name : props.stain.name
-  const width: string = props.board ? props.board.width_in_cm : props.width_in_cm
-  const length: string = props.board ? props.board.length_in_cm : props.length_in_cm
-  const thickness: string = props.board ? props.board.thickness_in_cm : props.thickness_in_cm
-  const price: string = props.board ? props.board.price_in_cad : props.price_in_cad
+  const width: string = props.board ? props.board.widthInCm : props.widthInCm
+  const length: string = props.board ? props.board.lengthInCm : props.lengthInCm
+  const thickness: string = props.board ? props.board.thicknessInCm : props.thicknessInCm
+  const price: string = props.board ? props.board.priceInCad : props.priceInCad
 
-  const pictureURL: string = props.board ? props.board.picture_url : '/board.jpg'
+  const pictureURL: string = props.board ? props.board.pictureUrl : '/board.jpg'
 
   return (
     <div

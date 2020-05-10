@@ -81,11 +81,11 @@ const typeDefs = gql`
     wood: Wood!
     reviews(first: Int = 25, skip: Int = 0): [Review!]!
     stock: Int!
-    width_in_cm: Int!
-    length_in_cm: Int!
-    thickness_in_cm: Int!
-    price_in_cad: Int!
-    picture_url: String!
+    widthInCm: Int!
+    lengthInCm: Int!
+    thicknessInCm: Int!
+    priceInCad: Int!
+    pictureUrl: String!
     description: String!
   }
 
@@ -101,30 +101,30 @@ const typeDefs = gql`
 
   type Order {
     id: ID!
-    user_id: Int!
-    address_id: Int
+    userId: Int!
+    addressId: Int
     placed: String
-    tracking_code: String
+    trackingCode: String
     notes: String
-    final_cost: Int
-    in_stock_order_items(first: Int = 25, skip: Int = 0): [In_Stock_Order_Item]
-    custom_order_items(first: Int = 25, skip: Int = 0): [Custom_Order_Item]
+    finalCost: Int
+    inStockOrderItems(first: Int = 25, skip: Int = 0): [InStockOrderItem]
+    customOrderItems(first: Int = 25, skip: Int = 0): [CustomOrderItem]
   }
 
-  type In_Stock_Order_Item {
+  type InStockOrderItem {
     id: ID!
     board: Board!
     quantity: Int!
   }
 
-  type Custom_Order_Item {
+  type CustomOrderItem {
     id: ID!
     stain: Stain!
     wood: Wood!
-    width_in_cm: Int!
-    length_in_cm: Int!
-    thickness_in_cm: Int!
-    price_in_cad: Int!
+    widthInCm: Int!
+    lengthInCm: Int!
+    thicknessInCm: Int!
+    priceInCad: Int!
     quantity: Int!
   }
 

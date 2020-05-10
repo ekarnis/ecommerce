@@ -48,7 +48,7 @@ const Cart = () => {
   if (data) {
     // TODO make a mutation if user requires a new cart order, if data.Order = undefined or null
 
-    const inStockBoxes = data.orders[0].in_stock_order_items.map(
+    const inStockBoxes = data.orders[0].inStockOrderItems.map(
       inStockOrderItem => (
         <CartBox
           key={inStockOrderItem.id}
@@ -58,7 +58,7 @@ const Cart = () => {
       )
     )
 
-    const customBoxes = data.orders[0].custom_order_items.map(
+    const customBoxes = data.orders[0].customOrderItems.map(
       customOrderItem => (
         <CartBox
           key={customOrderItem.id}
@@ -67,13 +67,13 @@ const Cart = () => {
         />
       ))
 
-    const totalItemNumber: number = sumArrayProperties(data.orders[0].in_stock_order_items, 'quantity') +
-    sumArrayProperties(data.orders[0].custom_order_items, 'quantity')
+    const totalItemNumber: number = sumArrayProperties(data.orders[0].inStockOrderItems, 'quantity') +
+    sumArrayProperties(data.orders[0].customOrderItems, 'quantity')
 
-    const subTotal: number = sumArrayProperties(data.orders[0].custom_order_items, 'price_in_cad') +
-      data.orders[0].in_stock_order_items ? data.orders[0].in_stock_order_items.reduce(
+    const subTotal: number = sumArrayProperties(data.orders[0].customOrderItems, 'priceInCad') +
+      data.orders[0].inStockOrderItems ? data.orders[0].inStockOrderItems.reduce(
         (accumulator, inStockOrderItem) =>
-          accumulator + inStockOrderItem.quantity * inStockOrderItem.board.price_in_cad
+          accumulator + inStockOrderItem.quantity * inStockOrderItem.board.priceInCad
         , 0
       ) : 0
 

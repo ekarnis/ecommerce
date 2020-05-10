@@ -10,12 +10,12 @@ const BOARDS_QUERY = gql`
         wood{
             name
         }
-        length_in_cm
-        picture_url
-        price_in_cad
+        lengthInCm
+        pictureUrl
+        priceInCad
         stock
-        thickness_in_cm
-        width_in_cm
+        thicknessInCm
+        widthInCm
     }
   }
 `

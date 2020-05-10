@@ -4,8 +4,8 @@ import { sumArrayProperties } from '../utils/mathUtils'
 
 // TODO rename to CompletedOrderBox
 export default props => {
-  const totalItemNumber = sumArrayProperties(props.in_stock_order_items, 'quantity') +
-  sumArrayProperties(props.custom_order_items, 'quantity')
+  const totalItemNumber = sumArrayProperties(props.inStockOrderItems, 'quantity') +
+  sumArrayProperties(props.customOrderItems, 'quantity')
 
   return (
 
@@ -23,17 +23,17 @@ export default props => {
           <span className="text-lg font-bold text-indigo-500 mr-2">
             Total
           </span>
-          <span>${props.final_cost}</span>
+          <span>${props.finalCost}</span>
         </div>
         <div className='inline-flex items-center w-full'>
           <span className="text-lg font-bold text-indigo-500 mr-2">
             Date Ordered
           </span>
-          <span>{ new Intl.DateTimeFormat('en-CA', {
+          <span>{ props.placed ? new Intl.DateTimeFormat('en-CA', {
             year: 'numeric',
             month: 'long',
             day: '2-digit'
-          }).format(props.placed)}</span>
+          }).format(new Date(props.placed)) : 'this is a bug'}</span>
         </div>
       </div>
 

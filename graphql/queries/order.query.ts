@@ -4,13 +4,13 @@ const ORDERS_QUERY = gql`
   query Orders($appUserId: ID!, $getPlacedOrders: Boolean!) {
     orders(appUserId: $appUserId, getPlacedOrders: $getPlacedOrders) {
       id
-      user_id
-      address_id
+      userId
+      addressId
       placed
-      tracking_code
-      final_cost
+      trackingCode
+      finalCost
       notes
-      in_stock_order_items {
+      inStockOrderItems {
         id
         quantity
         board {
@@ -21,15 +21,15 @@ const ORDERS_QUERY = gql`
           wood {
             name
           }
-          length_in_cm
-          picture_url
-          price_in_cad
+          lengthInCm
+          pictureUrl
+          priceInCad
           stock
-          thickness_in_cm
-          width_in_cm
+          thicknessInCm
+          widthInCm
         }
       }
-      custom_order_items {
+      customOrderItems {
         id
         quantity
         stain {
@@ -38,10 +38,10 @@ const ORDERS_QUERY = gql`
         wood {
           name
         }
-        length_in_cm
-        price_in_cad
-        thickness_in_cm
-        width_in_cm
+        lengthInCm
+        priceInCad
+        thicknessInCm
+        widthInCm
       }
     }
   }
